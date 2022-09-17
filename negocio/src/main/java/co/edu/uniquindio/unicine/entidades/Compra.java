@@ -12,7 +12,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Compra implements Serializable {
@@ -29,9 +28,11 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fecha_compra;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 15)
+    private MedioPago medioDePago;
+
     //Relaciones
-    @OneToMany(mappedBy = "compra")
-    private List<Entrada> entradas;
 
     @OneToMany(mappedBy = "compra")
     private List<Cupon> cupones;
@@ -41,4 +42,25 @@ public class Compra implements Serializable {
 
     @ManyToOne
     private Cliente cliente;
+
+    @ManyToOne
+    private Funcion funcion;
+
+    @ManyToMany
+    @JoinTable(name = "entrada",
+            joinColumns = @JoinColumn(name = "compra_codigo"),
+            inverseJoinColumns = @JoinColumn(name = "silla_codigo")
+    )
+    private List<Silla> sillas;
+
+    @Builder
+    public Compra(MedioPago medioDePago, List<Cupon> cupones, List<ProductoConfiteria> productosConfiteria, Cliente cliente, Funcion funcion, List<Silla> sillas) {
+        this.fecha_compra = LocalDateTime.now();
+        this.medioDePago = medioDePago;
+        this.cupones = cupones;
+        this.productosConfiteria = productosConfiteria;
+        this.cliente = cliente;
+        this.funcion = funcion;
+        this.sillas = sillas;
+    }
 }

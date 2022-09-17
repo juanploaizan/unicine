@@ -40,8 +40,9 @@ public class Pelicula implements Serializable {
     private String nombre_estudio;
 
     @ElementCollection
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 40)
-    private List<String> reparto;
+    private List<Reparto> reparto;
 
     @Column(nullable = false)
     private String imagen;
@@ -50,8 +51,9 @@ public class Pelicula implements Serializable {
     private String trailer;
 
     @ElementCollection
-    @Column(nullable = false, length = 30)
-    private List<String> genero;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 16)
+    private List<Genero> genero;
 
     @Column(nullable = false, length = 40)
     private String estado_pelicula;

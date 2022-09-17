@@ -21,8 +21,11 @@ public class Horario implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Column(nullable = false)
-    private LocalDateTime horario;
+    @Column(nullable = false, length = 9)
+    private String dia;
+
+    @Column(nullable = false, length = 8)
+    private String hora;
 
     //Relaciones
     @OneToOne(mappedBy = "horario")

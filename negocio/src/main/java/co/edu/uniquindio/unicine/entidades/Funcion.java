@@ -32,9 +32,9 @@ public class Funcion implements Serializable {
     @OneToOne
     private Horario horario;
 
-    @OneToMany(mappedBy = "funcion")
-    private List<Entrada> entradas;
-
     @ManyToOne
     private Pelicula pelicula;
+
+    @OneToMany(mappedBy = "funcion")
+    private List<Compra> compras;
 }

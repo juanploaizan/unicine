@@ -45,6 +45,9 @@ public class Cliente implements Serializable {
 
     private String imagen_perfil;
 
+    @Column(length = 25)
+    private String estado;
+
     @Column(nullable = false, length = 40)
     private String contrasenia;
 

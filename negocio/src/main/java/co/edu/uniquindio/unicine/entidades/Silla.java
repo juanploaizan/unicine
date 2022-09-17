@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -33,4 +34,7 @@ public class Silla implements Serializable {
     //Relaciones
     @ManyToOne
     private DistribucionSillas distribucionSillas;
+
+    @ManyToMany(mappedBy = "sillas")
+    private List<Compra> compras;
 }
