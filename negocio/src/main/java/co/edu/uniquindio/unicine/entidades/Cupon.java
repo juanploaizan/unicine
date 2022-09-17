@@ -17,6 +17,7 @@ import java.util.Objects;
 @ToString
 public class Cupon implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -28,7 +29,16 @@ public class Cupon implements Serializable {
     @Column(nullable = false)
     private String concepto;
 
+    @Column(length = 50)
+    private String estado;
+
     @Column(nullable = false)
     private LocalDate fecha_vencimiento;
 
+    //Relaciones
+    @ManyToOne
+    private Compra compra;
+
+    @ManyToOne
+    private Cliente cliente;
 }

@@ -16,6 +16,7 @@ import java.util.Objects;
 @ToString
 public class PQRS implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -27,5 +28,7 @@ public class PQRS implements Serializable {
     @Column(nullable = false)
     private String motivo;
 
-
+    //Relaciones
+    @ManyToOne
+    private Cliente cliente;
 }

@@ -15,7 +15,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Administrador_ciudad implements Serializable {
+public class AdministradorPlataforma implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
@@ -36,4 +36,5 @@ public class Administrador_ciudad implements Serializable {
 
     @Column(nullable = false, length = 40)
     private String contrasenia;
+
 }

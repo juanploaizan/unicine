@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.List;
 
 @Entity
 @Getter
@@ -13,8 +13,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Distribucion_sillas implements Serializable {
+public class DistribucionSillas implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -32,5 +33,10 @@ public class Distribucion_sillas implements Serializable {
     @Column(nullable = false)
     private String numeracion_columnas;
 
+    //Relaciones
+    @OneToMany(mappedBy = "distribucionSillas")
+    private List<Sala> salas;
 
+    @OneToMany(mappedBy = "distribucionSillas")
+    private List<Silla> sillas;
 }

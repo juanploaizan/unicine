@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -16,6 +15,7 @@ import java.util.Objects;
 @ToString
 public class Horario implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -24,4 +24,7 @@ public class Horario implements Serializable {
     @Column(nullable = false)
     private LocalDateTime horario;
 
+    //Relaciones
+    @OneToOne(mappedBy = "horario")
+    private Funcion funcion;
 }

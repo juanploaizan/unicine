@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +16,7 @@ import java.util.Objects;
 @ToString
 public class Teatro implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -26,5 +28,10 @@ public class Teatro implements Serializable {
     @Column(nullable = false, unique = true, length = 150)
     private String direccion;
 
+    //Relaciones
+    @ManyToOne
+    private Ciudad ciudad;
 
+    @OneToMany(mappedBy = "teatro")
+    private List<Sala> salas;
 }

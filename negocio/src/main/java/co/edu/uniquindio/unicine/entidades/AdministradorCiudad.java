@@ -5,9 +5,9 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -16,8 +16,9 @@ import java.util.Objects;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Administrador_plataforma implements Serializable {
+public class AdministradorCiudad implements Serializable {
 
+    //Atributos
     @Id
     @EqualsAndHashCode.Include
     @Column(length = 10)
@@ -38,4 +39,7 @@ public class Administrador_plataforma implements Serializable {
     @Column(nullable = false, length = 40)
     private String contrasenia;
 
+    //Relaciones
+    @OneToOne
+    private Ciudad ciudad;
 }

@@ -15,6 +15,7 @@ import java.util.Objects;
 @ToString
 public class Silla implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -29,5 +30,7 @@ public class Silla implements Serializable {
     @Column(nullable = false)
     private String estado;
 
-
+    //Relaciones
+    @ManyToOne
+    private DistribucionSillas distribucionSillas;
 }

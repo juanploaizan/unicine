@@ -14,6 +14,8 @@ import java.util.List;
 @ToString
 public class Pelicula implements Serializable {
 
+    //Atributos
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -53,4 +55,8 @@ public class Pelicula implements Serializable {
 
     @Column(nullable = false, length = 40)
     private String estado_pelicula;
+
+    //Relaciones
+    @OneToMany(mappedBy = "pelicula")
+    private List<Funcion> funciones;
 }

@@ -5,8 +5,10 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +19,8 @@ import java.util.Objects;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Cliente implements Serializable {
+
+    //Atributos
 
     @Id
     @EqualsAndHashCode.Include
@@ -39,10 +43,18 @@ public class Cliente implements Serializable {
     @Column(length = 10, nullable = false, unique = true)
     private String telefono;
 
-
     private String imagen_perfil;
 
     @Column(nullable = false, length = 40)
     private String contrasenia;
 
+    //Relaciones
+    @OneToMany(mappedBy = "cliente")
+    private List<Cupon> cupones;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Compra> compras;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<PQRS> pqrs;
 }

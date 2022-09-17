@@ -15,6 +15,7 @@ import java.util.Objects;
 @ToString
 public class Entrada implements Serializable {
 
+    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -23,4 +24,10 @@ public class Entrada implements Serializable {
     @Column(nullable = false)
     private Float precio;
 
+    //Relaciones
+    @ManyToOne
+    private Funcion funcion;
+
+    @ManyToOne
+    private Compra compra;
 }
