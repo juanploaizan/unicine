@@ -61,4 +61,21 @@ public class Pelicula implements Serializable {
     //Relaciones
     @OneToMany(mappedBy = "pelicula")
     private List<Funcion> funciones;
+
+    @Builder
+    public Pelicula(String nombre, String sinopsis, Integer duracion_minutos, Integer edad_apropiada,
+                    String nombre_director, String nombre_estudio, List<Reparto> reparto,
+                    String imagen, String trailer, List<Genero> genero, String estado_pelicula) {
+        this.nombre = nombre;
+        this.sinopsis = sinopsis;
+        this.duracion_minutos = duracion_minutos;
+        this.edad_apropiada = edad_apropiada;
+        this.nombre_director = nombre_director;
+        this.nombre_estudio = nombre_estudio;
+        this.reparto = reparto;
+        this.imagen = imagen;
+        this.trailer = trailer;
+        this.genero = genero;
+        this.estado_pelicula = estado_pelicula;
+    }
 }

@@ -39,4 +39,12 @@ public class DistribucionSillas implements Serializable {
 
     @OneToMany(mappedBy = "distribucionSillas")
     private List<Silla> sillas;
+
+    @Builder
+    public DistribucionSillas(Integer cantidad_filas, Integer cantidad_columnas, String numeracion_filas, String numeracion_columnas) {
+        this.cantidad_filas = cantidad_filas;
+        this.cantidad_columnas = cantidad_columnas;
+        this.numeracion_filas = numeracion_filas;
+        this.numeracion_columnas = numeracion_columnas;
+    }
 }

@@ -36,9 +36,18 @@ public class Cupon implements Serializable {
     private LocalDate fecha_vencimiento;
 
     //Relaciones
-    @ManyToOne
+    @OneToOne
     private Compra compra;
 
     @ManyToOne
     private Cliente cliente;
+
+    @Builder
+    public Cupon(Integer criterio, String concepto, String estado, LocalDate fecha_vencimiento, Cliente cliente) {
+        this.criterio = criterio;
+        this.concepto = concepto;
+        this.estado = estado;
+        this.fecha_vencimiento = fecha_vencimiento;
+        this.cliente = cliente;
+    }
 }

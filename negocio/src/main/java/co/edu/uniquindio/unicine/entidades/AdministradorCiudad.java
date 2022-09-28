@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class AdministradorCiudad implements Serializable {
@@ -42,4 +41,16 @@ public class AdministradorCiudad implements Serializable {
     //Relaciones
     @OneToOne
     private Ciudad ciudad;
+
+    @Builder
+    public AdministradorCiudad(String cedula, String nombre_completo, String telefono, String email,
+                               String imagen_perfil, String contrasenia, Ciudad ciudad) {
+        this.cedula = cedula;
+        this.nombre_completo = nombre_completo;
+        this.telefono = telefono;
+        this.email = email;
+        this.imagen_perfil = imagen_perfil;
+        this.contrasenia = contrasenia;
+        this.ciudad = ciudad;
+    }
 }

@@ -2,10 +2,7 @@ package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 import java.util.List;
@@ -40,8 +37,9 @@ public class Cliente implements Serializable {
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
+    @ElementCollection
     @Column(length = 10, nullable = false, unique = true)
-    private String telefono;
+    private List<String> telefonos;
 
     private String imagen_perfil;
 
@@ -60,4 +58,18 @@ public class Cliente implements Serializable {
 
     @OneToMany(mappedBy = "cliente")
     private List<PQRS> pqrs;
+
+    @Builder
+    public Cliente(String cedula, String nombre_completo, Integer edad, String direccion, String email,
+                   List<String> telefonos, String imagen_perfil, String estado, String contrasenia) {
+        this.cedula = cedula;
+        this.nombre_completo = nombre_completo;
+        this.edad = edad;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefonos = telefonos;
+        this.imagen_perfil = imagen_perfil;
+        this.estado = estado;
+        this.contrasenia = contrasenia;
+    }
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -37,7 +38,15 @@ public class Sala implements Serializable {
     @ManyToOne
     private DistribucionSillas distribucionSillas;
 
-    @OneToOne(mappedBy = "sala")
-    private Funcion funcion;
+    @OneToMany(mappedBy = "sala")
+    private List<Funcion> funciones;
 
+    @Builder
+    public Sala(Integer numero_sala, String tipo_sala, Teatro teatro, TipoSala tipoSala, DistribucionSillas distribucionSillas) {
+        this.numero_sala = numero_sala;
+        this.tipo_sala = tipo_sala;
+        this.teatro = teatro;
+        this.tipoSala = tipoSala;
+        this.distribucionSillas = distribucionSillas;
+    }
 }

@@ -37,4 +37,13 @@ public class Silla implements Serializable {
 
     @ManyToMany(mappedBy = "sillas")
     private List<Compra> compras;
+
+    @Builder
+
+    public Silla(String fila, String columna, String estado, DistribucionSillas distribucionSillas) {
+        this.fila = fila;
+        this.columna = columna;
+        this.estado = estado;
+        this.distribucionSillas = distribucionSillas;
+    }
 }

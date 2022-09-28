@@ -12,7 +12,6 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class AdministradorPlataforma implements Serializable {
@@ -37,4 +36,13 @@ public class AdministradorPlataforma implements Serializable {
     @Column(nullable = false, length = 40)
     private String contrasenia;
 
+    @Builder
+    public AdministradorPlataforma(String cedula, String nombre_completo, String telefono, String email, String imagen_perfil, String contrasenia) {
+        this.cedula = cedula;
+        this.nombre_completo = nombre_completo;
+        this.telefono = telefono;
+        this.email = email;
+        this.imagen_perfil = imagen_perfil;
+        this.contrasenia = contrasenia;
+    }
 }

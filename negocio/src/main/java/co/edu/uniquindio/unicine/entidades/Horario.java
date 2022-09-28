@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +29,13 @@ public class Horario implements Serializable {
     private String hora;
 
     //Relaciones
-    @OneToOne(mappedBy = "horario")
-    private Funcion funcion;
+    @OneToMany(mappedBy = "horario")
+    private List<Funcion> funciones;
+
+    @Builder
+
+    public Horario(String dia, String hora) {
+        this.dia = dia;
+        this.hora = hora;
+    }
 }

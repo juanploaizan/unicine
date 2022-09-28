@@ -34,4 +34,11 @@ public class ProductoConfiteria implements Serializable {
     //Relaciones
     @ManyToMany(mappedBy = "productosConfiteria")
     private List<Compra> compras;
+
+    @Builder
+    public ProductoConfiteria(String nombre, String extras, String imagen_producto) {
+        this.nombre = nombre;
+        this.extras = extras;
+        this.imagen_producto = imagen_producto;
+    }
 }

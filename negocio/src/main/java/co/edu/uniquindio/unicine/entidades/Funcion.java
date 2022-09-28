@@ -26,10 +26,10 @@ public class Funcion implements Serializable {
     private LocalDateTime fecha_completa;
 
     //Relaciones
-    @OneToOne
+    @ManyToOne
     private Sala sala;
 
-    @OneToOne
+    @ManyToOne
     private Horario horario;
 
     @ManyToOne
@@ -37,4 +37,12 @@ public class Funcion implements Serializable {
 
     @OneToMany(mappedBy = "funcion")
     private List<Compra> compras;
+
+    @Builder
+    public Funcion(LocalDateTime fecha_completa, Sala sala, Horario horario, Pelicula pelicula) {
+        this.fecha_completa = fecha_completa;
+        this.sala = sala;
+        this.horario = horario;
+        this.pelicula = pelicula;
+    }
 }
