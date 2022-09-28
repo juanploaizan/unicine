@@ -59,6 +59,8 @@ public class Pelicula implements Serializable {
     private String estado_pelicula;
 
     //Relaciones
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "pelicula")
     private List<Funcion> funciones;
 

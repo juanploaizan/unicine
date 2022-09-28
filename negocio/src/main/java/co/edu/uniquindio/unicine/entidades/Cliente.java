@@ -50,18 +50,21 @@ public class Cliente implements Serializable {
     private String contrasenia;
 
     //Relaciones
+    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<Cupon> cupones;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<Compra> compras;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<PQRS> pqrs;
 
     @Builder
     public Cliente(String cedula, String nombre_completo, Integer edad, String direccion, String email,
-                   List<String> telefonos, String imagen_perfil, String estado, String contrasenia) {
+                   List<String> telefonos, String imagen_perfil,String contrasenia) {
         this.cedula = cedula;
         this.nombre_completo = nombre_completo;
         this.edad = edad;
@@ -69,7 +72,7 @@ public class Cliente implements Serializable {
         this.email = email;
         this.telefonos = telefonos;
         this.imagen_perfil = imagen_perfil;
-        this.estado = estado;
+        this.estado = "DESCONECTADO";
         this.contrasenia = contrasenia;
     }
 }

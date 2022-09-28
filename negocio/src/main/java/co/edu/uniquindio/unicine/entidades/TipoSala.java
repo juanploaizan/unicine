@@ -28,6 +28,8 @@ public class TipoSala implements Serializable {
     private Float precio_adicional;
 
     //Relaciones
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "tipoSala")
     private List<Sala> salas;
 

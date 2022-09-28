@@ -28,6 +28,7 @@ public class Ciudad implements Serializable {
     @OneToOne(mappedBy = "ciudad")
     private AdministradorCiudad administradorCiudad;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "ciudad")
     private List <Teatro> teatros;
 

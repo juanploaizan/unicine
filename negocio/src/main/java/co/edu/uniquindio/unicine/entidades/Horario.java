@@ -29,6 +29,8 @@ public class Horario implements Serializable {
     private String hora;
 
     //Relaciones
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "horario")
     private List<Funcion> funciones;
 
