@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -36,18 +37,17 @@ public class Cupon implements Serializable {
     private LocalDate fecha_vencimiento;
 
     //Relaciones
-    @OneToOne
+    @OneToOne(mappedBy = "cupon")
     private Compra compra;
 
-    @ManyToOne
-    private Cliente cliente;
+    @ManyToMany(mappedBy = "cupones")
+    private List<Cliente> cliente;
 
     @Builder
-    public Cupon(Integer criterio, String concepto, String estado, LocalDate fecha_vencimiento, Cliente cliente) {
+    public Cupon(Integer criterio, String concepto, String estado, LocalDate fecha_vencimiento) {
         this.criterio = criterio;
         this.concepto = concepto;
         this.estado = estado;
         this.fecha_vencimiento = fecha_vencimiento;
-        this.cliente = cliente;
     }
 }

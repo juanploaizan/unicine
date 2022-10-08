@@ -2,12 +2,10 @@ package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class AdministradorCiudad implements Serializable {
+public class AdministradorTeatro implements Serializable {
 
     //Atributos
     @Id
@@ -39,18 +37,17 @@ public class AdministradorCiudad implements Serializable {
     private String contrasenia;
 
     //Relaciones
-    @OneToOne
-    private Ciudad ciudad;
+    @OneToMany(mappedBy = "administradorTeatro")
+    private List<Teatro> teatros;
 
     @Builder
-    public AdministradorCiudad(String cedula, String nombre_completo, String telefono, String email,
-                               String imagen_perfil, String contrasenia, Ciudad ciudad) {
+    public AdministradorTeatro(String cedula, String nombre_completo, String telefono, String email,
+                               String imagen_perfil, String contrasenia) {
         this.cedula = cedula;
         this.nombre_completo = nombre_completo;
         this.telefono = telefono;
         this.email = email;
         this.imagen_perfil = imagen_perfil;
         this.contrasenia = contrasenia;
-        this.ciudad = ciudad;
     }
 }

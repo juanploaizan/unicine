@@ -25,8 +25,6 @@ public class Ciudad implements Serializable {
     private String nombre;
 
     //Relaciones
-    @OneToOne(mappedBy = "ciudad")
-    private AdministradorCiudad administradorCiudad;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "ciudad")

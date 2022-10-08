@@ -34,8 +34,11 @@ public class Compra implements Serializable {
 
     //Relaciones
 
-    @OneToOne(mappedBy = "compra")
+    @OneToOne
     private Cupon cupon;
+
+    @OneToMany(mappedBy = "compra")
+    private List<Entrada> entradas;
 
     @ManyToMany
     private List<ProductoConfiteria> productosConfiteria;
@@ -46,21 +49,13 @@ public class Compra implements Serializable {
     @ManyToOne
     private Funcion funcion;
 
-    @ManyToMany
-    @JoinTable(name = "entrada",
-            joinColumns = @JoinColumn(name = "compra_codigo"),
-            inverseJoinColumns = @JoinColumn(name = "silla_codigo")
-    )
-    private List<Silla> sillas;
-
     @Builder
-    public Compra(MedioPago medioDePago, Cupon cupon, List<ProductoConfiteria> productosConfiteria, Cliente cliente, Funcion funcion, List<Silla> sillas) {
+    public Compra(MedioPago medioDePago, Cupon cupon, List<ProductoConfiteria> productosConfiteria, Cliente cliente, Funcion funcion) {
         this.fecha_compra = LocalDateTime.now();
         this.medioDePago = medioDePago;
         this.cupon = cupon;
         this.productosConfiteria = productosConfiteria;
         this.cliente = cliente;
         this.funcion = funcion;
-        this.sillas = sillas;
     }
 }

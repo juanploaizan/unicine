@@ -25,7 +25,7 @@ public class Cliente implements Serializable {
     private String cedula;
 
     @Column(nullable = false, length = 60)
-    private String nombre_completo;
+    private String nombreCompleto;
 
     @Column(nullable = false)
     private Integer edad;
@@ -38,7 +38,6 @@ public class Cliente implements Serializable {
     private String email;
 
     @ElementCollection
-    @Column(length = 10, nullable = false, unique = true)
     private List<String> telefonos;
 
     private String imagen_perfil;
@@ -47,11 +46,12 @@ public class Cliente implements Serializable {
     private String estado;
 
     @Column(nullable = false, length = 40)
+    @ToString.Exclude
     private String contrasenia;
 
     //Relaciones
     @ToString.Exclude
-    @OneToMany(mappedBy = "cliente")
+    @ManyToMany
     private List<Cupon> cupones;
 
     @ToString.Exclude
@@ -66,7 +66,7 @@ public class Cliente implements Serializable {
     public Cliente(String cedula, String nombre_completo, Integer edad, String direccion, String email,
                    List<String> telefonos, String imagen_perfil,String contrasenia) {
         this.cedula = cedula;
-        this.nombre_completo = nombre_completo;
+        this.nombreCompleto = nombre_completo;
         this.edad = edad;
         this.direccion = direccion;
         this.email = email;

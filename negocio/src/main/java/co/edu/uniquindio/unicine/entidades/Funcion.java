@@ -23,8 +23,10 @@ public class Funcion implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private LocalDateTime fecha_completa;
+    private LocalDateTime fechaCompleta;
 
+    @Column(nullable = false)
+    private Integer precio;
     //Relaciones
     @ManyToOne
     private Sala sala;
@@ -40,8 +42,9 @@ public class Funcion implements Serializable {
     private List<Compra> compras;
 
     @Builder
-    public Funcion(LocalDateTime fecha_completa, Sala sala, Horario horario, Pelicula pelicula) {
-        this.fecha_completa = fecha_completa;
+    public Funcion(LocalDateTime fechaCompleta, Integer precio ,Sala sala, Horario horario, Pelicula pelicula) {
+        this.fechaCompleta = fechaCompleta;
+        this.precio = precio;
         this.sala = sala;
         this.horario = horario;
         this.pelicula = pelicula;

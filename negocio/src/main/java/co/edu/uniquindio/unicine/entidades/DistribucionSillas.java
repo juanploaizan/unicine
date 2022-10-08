@@ -22,16 +22,16 @@ public class DistribucionSillas implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private Integer cantidad_filas;
+    private Integer filas;
 
     @Column(nullable = false)
-    private Integer cantidad_columnas;
+    private Integer columnas;
 
     @Column(nullable = false)
-    private String numeracion_filas;
+    private Integer totalSillas;
 
     @Column(nullable = false)
-    private String numeracion_columnas;
+    private String esquemaSillas;
 
     //Relaciones
 
@@ -39,15 +39,11 @@ public class DistribucionSillas implements Serializable {
     @OneToMany(mappedBy = "distribucionSillas")
     private List<Sala> salas;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "distribucionSillas")
-    private List<Silla> sillas;
-
     @Builder
-    public DistribucionSillas(Integer cantidad_filas, Integer cantidad_columnas, String numeracion_filas, String numeracion_columnas) {
-        this.cantidad_filas = cantidad_filas;
-        this.cantidad_columnas = cantidad_columnas;
-        this.numeracion_filas = numeracion_filas;
-        this.numeracion_columnas = numeracion_columnas;
+    public DistribucionSillas(Integer filas, Integer columnas, Integer totalSillas, String esquemaSillas) {
+        this.filas = filas;
+        this.columnas = columnas;
+        this.totalSillas = totalSillas;
+        this.esquemaSillas = esquemaSillas;
     }
 }
