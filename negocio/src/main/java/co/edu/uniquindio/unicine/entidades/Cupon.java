@@ -28,26 +28,32 @@ public class Cupon implements Serializable {
     private Integer criterio;
 
     @Column(nullable = false)
+    private Float descuento;
+
+    @Column(nullable = false)
     private String concepto;
 
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String estado;
 
     @Column(nullable = false)
-    private LocalDate fecha_vencimiento;
+    private LocalDate fechaVencimiento;
 
     //Relaciones
+    @ToString.Exclude
     @OneToOne(mappedBy = "cupon")
     private Compra compra;
 
-    @ManyToMany(mappedBy = "cupones")
-    private List<Cliente> cliente;
+    @ToString.Exclude
+    @ManyToOne
+    private Cliente cliente;
 
     @Builder
-    public Cupon(Integer criterio, String concepto, String estado, LocalDate fecha_vencimiento) {
+    public Cupon(Integer criterio, Float descuento, String concepto, LocalDate fecha_vencimiento) {
         this.criterio = criterio;
+        this.descuento = descuento;
         this.concepto = concepto;
-        this.estado = estado;
-        this.fecha_vencimiento = fecha_vencimiento;
+        this.estado = "CREADO";
+        this.fechaVencimiento = fecha_vencimiento;
     }
 }

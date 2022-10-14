@@ -26,6 +26,7 @@ public class Entrada implements Serializable {
     @Column(nullable = false)
     private Integer columna;
 
+    @ToString.Exclude
     @ManyToOne
     private Compra compra;
 

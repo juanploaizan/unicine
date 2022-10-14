@@ -31,8 +31,10 @@ public class AdministradorPlataforma implements Serializable {
     @Column(length = 150, nullable = false, unique = true)
     private String email;
 
+    @ToString.Exclude
     private String imagen_perfil;
 
+    @ToString.Exclude
     @Column(nullable = false, length = 40)
     private String contrasenia;
 

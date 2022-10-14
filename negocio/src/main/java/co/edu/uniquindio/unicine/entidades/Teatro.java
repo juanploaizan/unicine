@@ -29,9 +29,11 @@ public class Teatro implements Serializable {
     private String direccion;
 
     //Relaciones
+    @ToString.Exclude
     @ManyToOne
     private Ciudad ciudad;
 
+    @ToString.Exclude
     @ManyToOne
     private AdministradorTeatro administradorTeatro;
 

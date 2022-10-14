@@ -33,6 +33,7 @@ public class PQRS implements Serializable {
     private LocalDateTime fecha;
 
     //Relaciones
+    @ToString.Exclude
     @ManyToOne
     private Cliente cliente;
 

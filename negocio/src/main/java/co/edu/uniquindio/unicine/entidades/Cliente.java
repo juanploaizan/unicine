@@ -40,6 +40,7 @@ public class Cliente implements Serializable {
     @ElementCollection
     private List<String> telefonos;
 
+    @ToString.Exclude
     private String imagen_perfil;
 
     @Column(length = 25)
@@ -51,7 +52,7 @@ public class Cliente implements Serializable {
 
     //Relaciones
     @ToString.Exclude
-    @ManyToMany
+    @OneToMany(mappedBy = "cliente")
     private List<Cupon> cupones;
 
     @ToString.Exclude

@@ -2,6 +2,8 @@ package co.edu.uniquindio.unicine.test;
 
 import ch.qos.logback.core.CoreConstants;
 import co.edu.uniquindio.unicine.entidades.Cliente;
+import co.edu.uniquindio.unicine.entidades.Compra;
+import co.edu.uniquindio.unicine.entidades.Cupon;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,7 +34,7 @@ public class ClienteTest {
         telefonos.add("3127588409");
 
         Cliente cliente = new Cliente("1004916493", "Juan Pablo Loaiza Nieto", 20,
-                "direcccion jajaja", "jloaizanieto@gmail.com", telefonos, "url imagen", "204060120Gato");
+                "direcccion casa calle", "jloaizanieto@gmail.com", telefonos, "url imagen", "204060120Gato");
         Cliente guardado = clienteRepo.save(cliente);
 
         //Assertions.assertEquals("Juan Pablo Loaiza Nieto", guardado.getNombre_completo());
@@ -103,5 +105,19 @@ public class ClienteTest {
     public void ordenarRegistros() {
         List<Cliente> clientes = clienteRepo.findAll(PageRequest.of(0, 3, Sort.by("nombreCompleto").ascending() ) ).toList();
         clientes.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerComprasPorEmailCliente() {
+        List<Compra> compras = clienteRepo.obtenerComprasPorCorreoCliente("juanpepe@gnlkk.com");
+        compras.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerCuponesPorEmailCliente() {
+        List<Cupon> cupones = clienteRepo.obtenerCuponesPorCorreoCliente("juanpepe@gnlkk.com");
+        cupones.forEach(System.out::println);
     }
 }

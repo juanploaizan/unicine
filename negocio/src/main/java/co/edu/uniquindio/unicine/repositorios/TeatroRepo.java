@@ -9,7 +9,8 @@ import java.util.List;
 
 @Repository
 public interface TeatroRepo extends JpaRepository<Teatro, Integer> {
-    @Query("select t from Teatro t where t.ciudad.nombre = :nombreCiudad")
-    List<Teatro> listarPorCiudad(String nombreCiudad);
+
+    //@Query("select t from Teatro t where t.ciudad.nombre = :nombreCiudad")
+    //List<Teatro> obtenerTeatrosPorNombreCiudad(String nombreCiudad);
 
 }

@@ -32,6 +32,8 @@ public class ProductoConfiteria implements Serializable {
     private String imagen_producto;
 
     //Relaciones
+
+    @ToString.Exclude
     @ManyToMany(mappedBy = "productosConfiteria")
     private List<Compra> compras;
 

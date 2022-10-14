@@ -23,18 +23,17 @@ public class Sala implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private Integer numero_sala;
-
-    @Column(nullable = false)
-    private String tipo_sala;
-
+    private Integer numero;
     //Relaciones
+    @ToString.Exclude
     @ManyToOne
     private Teatro teatro;
 
+    @ToString.Exclude
     @ManyToOne
     private TipoSala tipoSala;
 
+    @ToString.Exclude
     @ManyToOne
     private DistribucionSillas distribucionSillas;
 
@@ -43,9 +42,8 @@ public class Sala implements Serializable {
     private List<Funcion> funciones;
 
     @Builder
-    public Sala(Integer numero_sala, String tipo_sala, Teatro teatro, TipoSala tipoSala, DistribucionSillas distribucionSillas) {
-        this.numero_sala = numero_sala;
-        this.tipo_sala = tipo_sala;
+    public Sala(Integer numero, Teatro teatro, TipoSala tipoSala, DistribucionSillas distribucionSillas) {
+        this.numero = numero;
         this.teatro = teatro;
         this.tipoSala = tipoSala;
         this.distribucionSillas = distribucionSillas;

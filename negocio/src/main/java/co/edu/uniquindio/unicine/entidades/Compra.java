@@ -34,18 +34,23 @@ public class Compra implements Serializable {
 
     //Relaciones
 
+    @ToString.Exclude
     @OneToOne
     private Cupon cupon;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "compra")
     private List<Entrada> entradas;
 
+    @ToString.Exclude
     @ManyToMany
     private List<ProductoConfiteria> productosConfiteria;
 
+    @ToString.Exclude
     @ManyToOne
     private Cliente cliente;
 
+    @ToString.Exclude
     @ManyToOne
     private Funcion funcion;
 
