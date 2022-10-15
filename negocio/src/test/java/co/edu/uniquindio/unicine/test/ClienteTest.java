@@ -120,4 +120,15 @@ public class ClienteTest {
         List<Cupon> cupones = clienteRepo.obtenerCuponesPorCorreoCliente("juanpepe@gnlkk.com");
         cupones.forEach(System.out::println);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerNumeroCuponesRedimidosPorCadaCliente() {
+
+        List<Object[]> cuponesRedimidos = clienteRepo.obtenerNumeroCuponeRedimidosPorCadaCliente();
+        cuponesRedimidos.forEach(o ->
+                System.out.println(o[0] + ", " + o[1])
+        );
+
+    }
 }

@@ -52,8 +52,8 @@ public class Pelicula implements Serializable {
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 16)
-    private List<Genero> genero;
+    @Column(nullable = false, length = 20)
+    private List<Genero> generos;
 
     @Column(nullable = false, length = 40)
     private String estadoPelicula;
@@ -67,7 +67,7 @@ public class Pelicula implements Serializable {
     @Builder
     public Pelicula(String nombre, String sinopsis, Integer duracion_minutos, Integer edad_apropiada,
                     String nombre_director, String nombre_estudio, List<Reparto> reparto,
-                    String imagen, String trailer, List<Genero> genero, String estadoPelicula) {
+                    String imagen, String trailer, List<Genero> generos, String estadoPelicula) {
         this.nombre = nombre;
         this.sinopsis = sinopsis;
         this.duracionMinutos = duracion_minutos;
@@ -77,7 +77,7 @@ public class Pelicula implements Serializable {
         this.reparto = reparto;
         this.imagen = imagen;
         this.trailer = trailer;
-        this.genero = genero;
+        this.generos = generos;
         this.estadoPelicula = estadoPelicula;
     }
 }

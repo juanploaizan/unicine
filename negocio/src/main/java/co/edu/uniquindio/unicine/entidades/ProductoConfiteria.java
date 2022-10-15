@@ -25,8 +25,13 @@ public class ProductoConfiteria implements Serializable {
     @Column(unique = true, nullable = false)
     private String nombre;
 
+    @Column (nullable = false)
+    private Integer precio;
+
     @Column (nullable = true, length = 50)
     private String extras;
+
+
 
     @Column(nullable = false)
     private String imagen_producto;
@@ -34,12 +39,14 @@ public class ProductoConfiteria implements Serializable {
     //Relaciones
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "productosConfiteria")
-    private List<Compra> compras;
+    @OneToMany(mappedBy = "productoConfiteria")
+    private List<CompraConfiteria> comprasConfiteria;
 
     @Builder
-    public ProductoConfiteria(String nombre, String extras, String imagen_producto) {
+
+    public ProductoConfiteria(String nombre, Integer precio, String extras, String imagen_producto) {
         this.nombre = nombre;
+        this.precio = precio;
         this.extras = extras;
         this.imagen_producto = imagen_producto;
     }

@@ -25,4 +25,16 @@ public class CiudadTest{
         List<Teatro> teatros = ciudadRepo.teatrosPorNombreCiudad("Armenia");
         teatros.forEach(System.out::println);
     }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void contarTeatrosPorCiudad() {
+        List<Object[]> teatrosCiudad = ciudadRepo.contarNumeroTeatrosPorCiudad();
+        teatrosCiudad.forEach(o ->
+                System.out.println(
+                        o[0] + ", " + o[1]
+                ));
+    }
+
+
 }

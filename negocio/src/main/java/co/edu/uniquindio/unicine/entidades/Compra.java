@@ -23,10 +23,10 @@ public class Compra implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
-    private Float precio_total;
+    private Float precioTotal;
 
     @Column(nullable = false)
-    private LocalDateTime fecha_compra;
+    private LocalDateTime fechaCompra;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
@@ -43,10 +43,6 @@ public class Compra implements Serializable {
     private List<Entrada> entradas;
 
     @ToString.Exclude
-    @ManyToMany
-    private List<ProductoConfiteria> productosConfiteria;
-
-    @ToString.Exclude
     @ManyToOne
     private Cliente cliente;
 
@@ -54,13 +50,18 @@ public class Compra implements Serializable {
     @ManyToOne
     private Funcion funcion;
 
+    @OneToMany(mappedBy = "compra")
+    private List<CompraConfiteria> comprasConfiteria;
+
     @Builder
-    public Compra(MedioPago medioDePago, Cupon cupon, List<ProductoConfiteria> productosConfiteria, Cliente cliente, Funcion funcion) {
-        this.fecha_compra = LocalDateTime.now();
+
+    public Compra(LocalDateTime fechaCompra, MedioPago medioDePago, Cupon cupon, List<Entrada> entradas, Cliente cliente, Funcion funcion, List<CompraConfiteria> comprasConfiteria) {
+        this.fechaCompra = fechaCompra;
         this.medioDePago = medioDePago;
         this.cupon = cupon;
-        this.productosConfiteria = productosConfiteria;
+        this.entradas = entradas;
         this.cliente = cliente;
         this.funcion = funcion;
+        this.comprasConfiteria = comprasConfiteria;
     }
 }

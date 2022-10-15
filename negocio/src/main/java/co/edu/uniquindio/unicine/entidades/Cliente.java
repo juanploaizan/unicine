@@ -12,7 +12,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
 public class Cliente implements Serializable {
@@ -73,7 +72,7 @@ public class Cliente implements Serializable {
         this.email = email;
         this.telefonos = telefonos;
         this.imagen_perfil = imagen_perfil;
-        this.estado = "DESCONECTADO";
+        this.estado = "NO_VERIFICADO";
         this.contrasenia = contrasenia;
     }
 }
