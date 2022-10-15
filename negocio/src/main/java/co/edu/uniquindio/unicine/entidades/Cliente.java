@@ -52,7 +52,7 @@ public class Cliente implements Serializable {
     //Relaciones
     @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
-    private List<Cupon> cupones;
+    private List<ClienteCupon> clienteCupones;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "cliente")

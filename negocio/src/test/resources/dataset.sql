@@ -89,12 +89,24 @@ insert into compra values (3, "2022-10-19", "MASTERCARD", 29600, "3", null, 3);
 insert into compra values (4, "2022-10-26", "MASTERCARD", 118400, "4", null, 4);
 insert into compra values (5, "2022-10-30", "MASTERCARD", 35600, "1", null, 5);
 
-insert into cupon values (1, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03", "1");
-insert into cupon values (2, "Descuento de fidelidad", 3, 5, "ACTIVO", "2022-10-03", "2");
-insert into cupon values (3, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03", "3");
-insert into cupon values (4, "Descuento de aniversario", 4, 8, "VENCIDO", "2022-10-03", "1");
-insert into cupon values (5, "Descuento de VIP", 1, 15, "ACTIVO", "2022-10-03", "1");
-insert into cupon values (6, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-06", "2");
+
+/*
+insert into cupon values (1, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03";
+insert into cupon values (2, "Descuento de registro", 3, 15, "ACTIVO", "2022-10-03");
+insert into cupon values (3, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03");
+insert into cupon values (4, "Descuento de aniversario", 4, 8, "VENCIDO", "2022-10-03");
+insert into cupon values (5, "Descuento de VIP", 1, 15, "ACTIVO", "2022-10-03");
+
+ */
+
+/*
+insert into cliente_cupones values ("1", 1);
+insert into cliente_cupones values ("1", 2);
+insert into cliente_cupones values ("2", 1);
+insert into cliente_cupones values ("2", 3);
+insert into cliente_cupones values ("3", 4);
+ */
+
 
 insert into entrada values (1, 10, 11, 7800, 1);
 insert into entrada values (2, 10, 12, 7800, 1);
@@ -102,6 +114,8 @@ insert into entrada values (3, 6, 8, 7800, 2);
 insert into entrada values (4, 7, 13, 7800, 3);
 insert into entrada values (5, 12, 14, 7800, 5);
 insert into entrada values (6, 13, 14, 7800, 4);
+
+
 
 insert into producto_confiteria values (1, null, "url-imagen-producto", "Combo 1", 22000);
 insert into producto_confiteria values (2, null, "url-imagen-producto", "Combo 2", 18000);
@@ -114,3 +128,5 @@ insert into compra_confiteria values (2, 22000, 1, 2, 1);
 insert into compra_confiteria values (3, 54000, 3, 3, 2);
 insert into compra_confiteria values (4, 24000, 2, 1, 4);
 insert into compra_confiteria values (5, 35600, 1, 5, 3);
+
+
