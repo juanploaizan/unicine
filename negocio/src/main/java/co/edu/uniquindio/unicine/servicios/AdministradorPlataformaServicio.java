@@ -50,7 +50,7 @@ public interface AdministradorPlataformaServicio {
 
     Cupon actualizarCupon(Cupon cupon) throws Exception;
 
-    void eliminarCupon(Cupon cupon) throws Exception;
+    void eliminarCupon(Integer codigo) throws Exception;
 
     List<Cupon> listarCupones();
 

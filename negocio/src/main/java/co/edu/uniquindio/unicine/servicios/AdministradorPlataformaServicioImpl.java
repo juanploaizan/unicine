@@ -133,117 +133,195 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
 
     @Override
     public void eliminarPelicula(Integer codigo) throws Exception {
+        Optional<Pelicula> guardada = peliculaRepo.findById(codigo);
 
+        if (!guardada.isPresent()) {
+            throw new Exception("La pelicula no existe.");
+        } else {
+            peliculaRepo.delete(guardada.get());
+        }
     }
 
     @Override
     public List<Pelicula> listarPeliculas() {
-        return null;
+        return peliculaRepo.findAll();
     }
 
     @Override
     public List<Pelicula> listarPeliculasPorGenero(Genero genero) {
-        return null;
+        return peliculaRepo.listarPeliculasPorGenero(genero);
     }
 
     @Override
     public List<Pelicula> listarPeliculasPorEdadApropiada(Integer edadApropiada) {
-        return null;
+        return peliculaRepo.listarPeliculasPorEdadApropiada(edadApropiada);
     }
 
     @Override
     public List<Pelicula> listarPeliculasPorDirector(String nombreDirector) {
-        return null;
+        return peliculaRepo.listarPeliculasPorDirector(nombreDirector);
     }
 
     @Override
     public List<Pelicula> listarPeliculasPorEstudio(String nombreEstudio) {
-        return null;
+        return peliculaRepo.listarPeliculasPorEstudio(nombreEstudio);
     }
 
     @Override
     public Cupon obtenerCupon(Integer codigo) throws Exception {
-        return null;
+        Optional<Cupon> guardado = cuponRepo.findById(codigo);
+
+        if (!guardado.isPresent()) {
+            throw new Exception("El cupon no existe.");
+        } else {
+            return guardado.get();
+        }
     }
 
     @Override
     public Cupon registrarCupon(Cupon cupon) throws Exception {
-        return null;
+        Optional<Cupon> cuponExiste = cuponRepo.findById(cupon.getCodigo());
+
+        if (cuponExiste.isPresent()) {
+            throw new Exception("El codigo ingresado ya está siendo usado para otro cupón.");
+        } else {
+            return cuponRepo.save(cupon);
+        }
     }
 
     @Override
     public Cupon actualizarCupon(Cupon cupon) throws Exception {
-        return null;
+        Optional<Cupon> guardado = cuponRepo.findById(cupon.getCodigo());
+
+        if (!guardado.isPresent()) {
+            throw new Exception("El cupon no existe.");
+        } else {
+            return cuponRepo.save(cupon);
+        }
     }
 
     @Override
-    public void eliminarCupon(Cupon cupon) throws Exception {
+    public void eliminarCupon(Integer codigoCupon) throws Exception {
+        Optional<Cupon> guardado = cuponRepo.findById(codigoCupon);
 
+        if (!guardado.isPresent()) {
+            throw new Exception("El cupon no existe.");
+        } else {
+            cuponRepo.delete(guardado.get());
+        }
     }
 
     @Override
     public List<Cupon> listarCupones() {
-        return null;
+        return cuponRepo.findAll();
     }
 
     @Override
     public List<Cupon> listarCuponesPorDescuento(Float descuento) {
-        return null;
+        return cuponRepo.listarCuponesPorDescuento(descuento);
     }
 
     @Override
     public ProductoConfiteria obtenerProductoConfiteria(Integer codigo) throws Exception {
-        return null;
+        Optional<ProductoConfiteria> guardado = productoConfiteriaRepo.findById(codigo);
+
+        if (!guardado.isPresent()) {
+            throw new Exception("El producto de confitería no existe.");
+        } else {
+            return guardado.get();
+        }
     }
 
     @Override
     public ProductoConfiteria registrarProductoConfiteria(ProductoConfiteria productoConfiteria) throws Exception {
-        return null;
+        Optional<ProductoConfiteria> productoConfiteriaExiste = productoConfiteriaRepo.findById(productoConfiteria.getCodigo());
+
+        if (productoConfiteriaExiste.isPresent()) {
+            throw new Exception("El codigo ingresado ya está siendo usado para otro producto de confitería.");
+        } else {
+            return productoConfiteriaRepo.save(productoConfiteria);
+        }
     }
 
     @Override
     public ProductoConfiteria actualizarProductoConfiteria(ProductoConfiteria productoConfiteria) throws Exception {
-        return null;
+        Optional<ProductoConfiteria> guardado = productoConfiteriaRepo.findById(productoConfiteria.getCodigo());
+
+        if (!guardado.isPresent()) {
+            throw new Exception("El producto de confiteria no existe.");
+        } else {
+            return productoConfiteriaRepo.save(productoConfiteria);
+        }
     }
 
     @Override
     public void eliminarProductoConfiteria(Integer codigo) throws Exception {
+        Optional<ProductoConfiteria> guardado = productoConfiteriaRepo.findById(codigo);
 
+        if (!guardado.isPresent()) {
+            throw new Exception("El producto de confiteria no existe.");
+        } else {
+            productoConfiteriaRepo.delete(guardado.get());
+        }
     }
 
     @Override
     public List<ProductoConfiteria> listarProductosConfiteria() {
-        return null;
+        return productoConfiteriaRepo.findAll();
     }
 
     @Override
     public List<ProductoConfiteria> listarProductosConfiteriaPorRangoPrecio(Integer precioMinimo, Integer precioMaximo) {
-        return null;
+        return productoConfiteriaRepo.listarProductosConfiteriaRangoPrecio(precioMinimo, precioMaximo);
     }
 
     @Override
     public Ciudad obtenerCiudad(Integer codigo) throws Exception {
-        return null;
+        Optional<Ciudad> guardada = ciudadRepo.findById(codigo);
+
+        if (!guardada.isPresent()) {
+            throw new Exception("La ciudad no se encuentra registrada.");
+        } else {
+            return guardada.get();
+        }
     }
 
     @Override
     public Ciudad registrarCiudad(Ciudad ciudad) throws Exception {
-        return null;
+        Optional<Ciudad> ciudadExiste = ciudadRepo.findById(ciudad.getCodigo());
+
+        if (ciudadExiste.isPresent()) {
+            throw new Exception("El codigo ingresado ya está siendo usado para otra ciudad.");
+        } else {
+            return ciudadRepo.save(ciudad);
+        }
     }
 
     @Override
     public Ciudad actualizarCiudad(Ciudad ciudad) throws Exception {
-        return null;
+        Optional<Ciudad> guardada = ciudadRepo.findById(ciudad.getCodigo());
+
+        if (!guardada.isPresent()) {
+            throw new Exception("La ciudad no se encuentra registrada.");
+        } else {
+            return ciudadRepo.save(ciudad);
+        }
     }
 
     @Override
     public void eliminarCiudad(Integer codigo) throws Exception {
+        Optional<Ciudad> guardada = ciudadRepo.findById(codigo);
 
+        if (!guardada.isPresent()) {
+            throw new Exception("La ciudad no se encuentra registrada.");
+        } else {
+            ciudadRepo.delete(guardada.get());
+        }
     }
 
     @Override
     public List<Ciudad> listarCiudades() {
-        return null;
+        return ciudadRepo.findAll();
     }
 
 }

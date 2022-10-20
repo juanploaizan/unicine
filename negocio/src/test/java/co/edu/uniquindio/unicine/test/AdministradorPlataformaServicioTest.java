@@ -1,7 +1,6 @@
 package co.edu.uniquindio.unicine.test;
 
-import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.servicios.AdministradorPlataformaServicio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -141,5 +140,222 @@ public class AdministradorPlataformaServicioTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarPeliculaTest() {
+        try {
+            administradorPlataformaServicio.eliminarPelicula(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasTest() {
+        List<Pelicula> lista = administradorPlataformaServicio.listarPeliculas();
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasPorGeneroTest() {
+        Genero genero = Genero.ACCION;
+        List<Pelicula> lista = administradorPlataformaServicio.listarPeliculasPorGenero(genero);
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasPorEdadApropiadaTest() {
+        List<Pelicula> lista = administradorPlataformaServicio.listarPeliculasPorEdadApropiada(14);
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasPorDirectorTest() {
+        List<Pelicula> lista = administradorPlataformaServicio.listarPeliculasPorDirector("Pepe Aguilar");
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasPorEstudioTest() {
+        List<Pelicula> lista = administradorPlataformaServicio.listarPeliculasPorEstudio("Disney");
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerCupon() {
+        try {
+            Cupon cupon = administradorPlataformaServicio.obtenerCupon(1);
+            Assertions.assertNotNull(cupon);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarCuponTest() {
+
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarCuponTest() {
+
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarCuponTest() {
+        try {
+            administradorPlataformaServicio.eliminarCupon(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCuponesTest() {
+        List<Cupon> lista = administradorPlataformaServicio.listarCupones();
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCuponesPorDescuentoTest() {
+        List<Cupon> lista = administradorPlataformaServicio.listarCuponesPorDescuento(Float.valueOf(10));
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerProductoConfiteriaTest() {
+        try {
+            ProductoConfiteria productoConfiteria = administradorPlataformaServicio.obtenerProductoConfiteria(1);
+            Assertions.assertNotNull(productoConfiteria);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarProductoConfiteriaTest() {
+        ProductoConfiteria productoConfiteria = ProductoConfiteria.builder().nombre("Patatas Alibañesas")
+                        .precio(240000).extras("Salsa Alibañesa").imagen_producto("url_patatas").build();
+        productoConfiteria.setCodigo(10);
+
+        try {
+            ProductoConfiteria nuevo = administradorPlataformaServicio.registrarProductoConfiteria(productoConfiteria);
+            Assertions.assertNotNull(nuevo);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarProductoConfiteriaTest() {
+        ProductoConfiteria productoConfiteria = null;
+
+        try {
+            productoConfiteria = administradorPlataformaServicio.obtenerProductoConfiteria(1);
+            productoConfiteria.setNombre("Fetuccini A La Carbonara");
+            ProductoConfiteria nuevo = null;
+            nuevo = administradorPlataformaServicio.actualizarProductoConfiteria(productoConfiteria);
+            Assertions.assertEquals("Fetuccini A La Carbonara", productoConfiteria.getNombre());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarProductoConfiteriaTest() {
+        try {
+            administradorPlataformaServicio.eliminarProductoConfiteria(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarProductosConfiteriaTest() {
+        List<ProductoConfiteria> lista = administradorPlataformaServicio.listarProductosConfiteria();
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarProductosConfiteriaPorRangoPrecioTest() {
+        List<ProductoConfiteria> lista = administradorPlataformaServicio.listarProductosConfiteriaPorRangoPrecio(12000, 22000);
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerCiudadTest() {
+        try {
+            Ciudad ciudad = administradorPlataformaServicio.obtenerCiudad(1);
+            Assertions.assertNotNull(ciudad);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarCiudadTest() {
+        Ciudad ciudad = Ciudad.builder().nombre("Tangamandapio").build();
+        ciudad.setCodigo(10);
+
+        try {
+            Ciudad nuevo = administradorPlataformaServicio.registrarCiudad(ciudad);
+            Assertions.assertNotNull(nuevo);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarCiudadTest() {
+        Ciudad ciudad = null;
+
+        try {
+            ciudad = administradorPlataformaServicio.obtenerCiudad(1);
+            ciudad.setNombre("Jonia");
+            Ciudad nuevo = null;
+            nuevo = administradorPlataformaServicio.actualizarCiudad(ciudad);
+            Assertions.assertEquals("Jonia", ciudad.getNombre());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarCiudadTest() {
+        try {
+            administradorPlataformaServicio.eliminarCiudad(1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCiudadTest() {
+        List<Ciudad> lista = administradorPlataformaServicio.listarCiudades();
+        lista.forEach(System.out::println);
     }
 }

@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CuponRepo extends JpaRepository<Cupon, Integer> {
 
-
-
+    @Query("select c from Cupon c where c.descuento = :descuento")
+    List<Cupon> listarCuponesPorDescuento(Float descuento);
 }
