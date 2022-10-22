@@ -74,7 +74,7 @@ insert into pelicula_generos values (4, "AVENTURA");
 insert into pelicula_generos values (4, "ACCION");
 insert into pelicula_generos values (5, "TERROR");
 
-insert into funcion values (1, 7500, 1, 4, 1);
+insert into funcion values (1, 7500, 1, 4, 2);
 insert into funcion values (2, 8000, 3, 3, 3);
 insert into funcion values (3, 7500, 2, 1, 4);
 insert into funcion values (4, 8000, 5, 2, 2);
@@ -88,7 +88,6 @@ insert into compra values (2, "2022-10-18", "MASTERCARD", 82600, "1", null, 2);
 insert into compra values (3, "2022-10-19", "MASTERCARD", 29600, "3", null, 3);
 insert into compra values (4, "2022-10-26", "MASTERCARD", 118400, "4", null, 4);
 insert into compra values (5, "2022-10-30", "MASTERCARD", 35600, "1", null, 5);
-
 
 /*
 insert into cupon values (1, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03";
