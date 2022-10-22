@@ -34,7 +34,6 @@ public class TipoSala implements Serializable {
     private List<Sala> salas;
 
     @Builder
-
     public TipoSala(String nombre, Float precio_adicional) {
         this.nombre = nombre;
         this.precio_adicional = precio_adicional;

@@ -23,23 +23,29 @@ public class Cliente implements Serializable {
     @Column(length = 10)
     private String cedula;
 
+    @NonNull
     @Column(nullable = false, length = 60)
     private String nombreCompleto;
 
+    @NonNull
     @Column(nullable = false)
     private Integer edad;
 
+    @NonNull
     @Column(nullable = false, length = 55)
     private String direccion;
 
     @Email
+    @NonNull
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
     @ElementCollection
+    @Column(unique = true, length = 10)
     private List<String> telefonos;
 
     @ToString.Exclude
+    @NonNull
     private String imagen_perfil;
 
     @Column(length = 25)
@@ -50,6 +56,7 @@ public class Cliente implements Serializable {
     private String contrasenia;
 
     //Relaciones
+
     @ToString.Exclude
     @OneToMany(mappedBy = "cliente")
     private List<ClienteCupon> clienteCupones;
