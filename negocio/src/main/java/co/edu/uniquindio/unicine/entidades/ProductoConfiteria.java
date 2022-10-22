@@ -31,8 +31,6 @@ public class ProductoConfiteria implements Serializable {
     @Column (nullable = true, length = 50)
     private String extras;
 
-
-
     @Column(nullable = false)
     private String imagen_producto;
 

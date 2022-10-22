@@ -18,10 +18,11 @@ public class Entrada implements Serializable {
     private Integer codigo;
 
     @Column(nullable = false)
+    @ToString.Exclude
     private Integer precio;
 
     @Column(nullable = false)
-    private Integer fila;
+    private Character fila;
 
     @Column(nullable = false)
     private Integer columna;
@@ -31,9 +32,8 @@ public class Entrada implements Serializable {
     private Compra compra;
 
     @Builder
-
-    public Entrada(Integer precio, Integer fila, Integer columna, Compra compra) {
-        this.precio = precio;
+    public Entrada(Character fila, Integer columna, Compra compra) {
+        this.precio = compra.getFuncion().getPrecio();
         this.fila = fila;
         this.columna = columna;
         this.compra = compra;

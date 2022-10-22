@@ -18,7 +18,7 @@ public class CompraConfiteria implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Float precio;
 
     @Column(nullable = false)
