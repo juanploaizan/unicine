@@ -202,13 +202,31 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarCuponTest() {
+        Cupon cupon = Cupon.builder().concepto("Descuento por gigachad").descuento(25F).build();
+        cupon.setCodigo(10);
 
+        try {
+            Cupon nuevo = administradorPlataformaServicio.registrarCupon(cupon);
+            Assertions.assertNotNull(cupon);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarCuponTest() {
+        Cupon cupon = null;
 
+        try {
+            cupon = administradorPlataformaServicio.obtenerCupon(1);
+            cupon.setConcepto("Descuento por votacion");
+            Cupon nuevo = null;
+            nuevo = administradorPlataformaServicio.actualizarCupon(cupon);
+            Assertions.assertEquals("Descuento por votacion", cupon.getConcepto());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test

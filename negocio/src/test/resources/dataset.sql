@@ -36,7 +36,7 @@ insert into administrador_teatro values ("1000", "1234", "jloasiisi@email.com", 
 insert into administrador_teatro values ("2000", "1234", "jloasi22i@email.com", "urlImagen", "Pedro Antonio Marín", "3125506568");
 insert into administrador_teatro values ("3000", "1234", "jloasiddi@email.com", "urlImagen", "María Teresa Nieto", "3124545840");
 insert into administrador_teatro values ("4000", "1234", "jloasi45i@email.com", "urlImagen", "John Freddy Gomez", "3127495409");
-insert into administrador_teatro values ("5000", "1234", "jloasitsi@email.com", "urlImagen", "Jose Alonso Perez", "3127448409");
+insert into administrador_teatro values ("5000", "1234", "jloasitsi@email.com", "urlImagen", "Alfredo Perez", "3127448409");
 
 insert into teatro values (1, "Barrio la aguapanela calle 2", "C.C Armenia", "1000", 1);
 insert into teatro values (2, "Direccion equis de Pereira", "C.C Pereira", "5000", 2);
@@ -91,21 +91,21 @@ insert into compra values (5, "2022-10-30", "MASTERCARD", 35600, "1", null, 5);
 
 
 /*
-insert into cupon values (1, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03";
-insert into cupon values (2, "Descuento de registro", 3, 15, "ACTIVO", "2022-10-03");
-insert into cupon values (3, "Descuento de cumpleaños", 2, 10, "REDIMIDO", "2022-10-03");
-insert into cupon values (4, "Descuento de aniversario", 4, 8, "VENCIDO", "2022-10-03");
-insert into cupon values (5, "Descuento de VIP", 1, 15, "ACTIVO", "2022-10-03");
-
+ (codigo, concepto, descuento)
  */
+insert into cupon values (1, "Descuento de registro", 15);
+insert into cupon values (2, "Descuento por primera compra", 10);
+insert into cupon values (3, "Descuento de cumpleaños", 20);
+insert into cupon values (4, "Descuento de VIP", 10);
 
 /*
-insert into cliente_cupones values ("1", 1);
-insert into cliente_cupones values ("1", 2);
-insert into cliente_cupones values ("2", 1);
-insert into cliente_cupones values ("2", 3);
-insert into cliente_cupones values ("3", 4);
+ (codigo, estado, fechaVencimiento, clienteCedula, compraCodigo, cuponCodigo)
  */
+insert into cliente_cupon values (1, "ACTIVO", "2022-10-31", "1", 9, 1);
+insert into cliente_cupon values (2, "REDIMIDO", "2022-10-31", "2", null, 1);
+insert into cliente_cupon values (3, "ACTIVO", "2022-11-06", "1", null, 2);
+insert into cliente_cupon values (4, "VENCIDO", "2022-11-09", "3", null, 3);
+insert into cliente_cupon values (5, "ACTIVO", "2022-11-15", "4", null, 3);
 
 
 insert into entrada values (1, 10, 11, 7800, 1);
@@ -114,8 +114,6 @@ insert into entrada values (3, 6, 8, 7800, 2);
 insert into entrada values (4, 7, 13, 7800, 3);
 insert into entrada values (5, 12, 14, 7800, 5);
 insert into entrada values (6, 13, 14, 7800, 4);
-
-
 
 insert into producto_confiteria values (1, null, "url-imagen-producto", "Combo 1", 22000);
 insert into producto_confiteria values (2, null, "url-imagen-producto", "Combo 2", 18000);
