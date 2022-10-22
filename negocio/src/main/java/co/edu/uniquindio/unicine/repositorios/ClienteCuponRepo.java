@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface CuponRepo extends JpaRepository<Cupon, Integer> {
+public interface ClienteCuponRepo extends JpaRepository<ClienteCupon, Integer> {
 
+    @Query("select c.clienteCupon from Compra c where c.codigo = :codigoCompra")
+    ClienteCupon obtenerClienteCupon(Integer codigoCompra);
 
-    @Query("select cup from ClienteCupon cup where cup.codigo = :codigoClienteCupon")
-    ClienteCupon obtenerClienteCupon(Integer codigoClienteCupon);
+    @Query("select c from Cupon c where c.codigo = :codigo")
+    Cupon obtenerCupon(Integer codigo);
 }
