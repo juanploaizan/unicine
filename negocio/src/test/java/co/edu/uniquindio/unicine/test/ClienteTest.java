@@ -5,6 +5,7 @@ import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.entidades.Cupon;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
+import co.edu.uniquindio.unicine.servicios.EmailService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,9 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void eliminar() {
         Cliente buscado = clienteRepo.findById("5").orElse(null);
-        clienteRepo.delete(buscado);
+        if (buscado != null) {
+            clienteRepo.delete(buscado);
+        }
         Assertions.assertNull(clienteRepo.findById("5").orElse(null));
     }
 
@@ -53,9 +56,12 @@ public class ClienteTest {
     @Sql("classpath:dataset.sql")
     public void actualizar() {
         Cliente guardado = clienteRepo.findById("5").orElse(null);
-        guardado.setEmail("juanpepe@gmail.com");
-        Cliente nuevo = clienteRepo.save(guardado);
-        Assertions.assertEquals("juanpepe@gmail.com", nuevo.getEmail());
+
+        if (guardado != null) {
+            guardado.setEmail("juanpepe@gmail.com");
+            Cliente nuevo = clienteRepo.save(guardado);
+            Assertions.assertEquals("juanpepe@gmail.com", nuevo.getEmail());
+        }
     }
 
     @Test
@@ -63,13 +69,6 @@ public class ClienteTest {
     public void obtener() {
         Optional<Cliente> buscado = clienteRepo.findById("4");
         Assertions.assertNotNull(buscado.orElse(null));
-    }
-
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void listar() {
-        List<Cliente> lista = clienteRepo.findAll();
-        lista.forEach(System.out::println);
     }
 
     @Test
@@ -88,39 +87,50 @@ public class ClienteTest {
 
     @Test
     @Sql("classpath:dataset.sql")
+    public void obtenerCuponesCliente() {
+        List<Cupon> cupones = clienteRepo.obtenerCuponesCliente("1");
+        Assertions.assertEquals(2, cupones.size());
+    }
+
+
+
+    /*
+    @Test
+    @Sql("classpath:dataset.sql")
     public void paginador() {
         List<Cliente> clientes = clienteRepo.findAll(PageRequest.of(0, 2)).toList();
         clientes.forEach(System.out::println);
     }
+     */
 
+    /*
     @Test
     @Sql("classpath:dataset.sql")
     public void paginadorEstado() {
         List<Cliente> clientes = clienteRepo.obtenerClientesPorEstado("PRUEBA", PageRequest.of(0, 3) );
         clientes.forEach(System.out::println);
     }
+     */
 
+    /*
     @Test
     @Sql("classpath:dataset.sql")
     public void ordenarRegistros() {
         List<Cliente> clientes = clienteRepo.findAll(PageRequest.of(0, 3, Sort.by("nombreCompleto").ascending() ) ).toList();
         clientes.forEach(System.out::println);
     }
+     */
 
+    /*
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerComprasPorEmailCliente() {
         List<Compra> compras = clienteRepo.obtenerComprasPorCorreoCliente("juanpepe@gnlkk.com");
         compras.forEach(System.out::println);
     }
+    */
 
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void obtenerCuponesPorEmailCliente() {
-        List<Cupon> cupones = clienteRepo.obtenerCuponesPorCorreoCliente("juanpepe@gnlkk.com");
-        cupones.forEach(System.out::println);
-    }
-
+    /*
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerNumeroCuponesRedimidosPorCadaCliente() {
@@ -129,6 +139,6 @@ public class ClienteTest {
         cuponesRedimidos.forEach(o ->
                 System.out.println(o[0] + ", " + o[1])
         );
-
     }
+     */
 }

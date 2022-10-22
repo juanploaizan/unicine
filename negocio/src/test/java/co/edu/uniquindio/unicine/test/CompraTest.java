@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.test;
 
 import co.edu.uniquindio.unicine.dto.InformacionComprasCliente;
+import co.edu.uniquindio.unicine.entidades.CompraConfiteria;
 import co.edu.uniquindio.unicine.entidades.Entrada;
 import co.edu.uniquindio.unicine.repositorios.CompraRepo;
 import org.junit.jupiter.api.Assertions;
@@ -21,11 +22,26 @@ public class CompraTest {
 
     @Test
     @Sql("classpath:dataset.sql")
-    public void obtenerEntradasPorID() {
-        List<Entrada> entradas = compraRepo.obtenerEntradasPorID(1);
+    public void obtenerEntradas() {
+        List<Entrada> entradas = compraRepo.obtenerEntradas(1);
         entradas.forEach(System.out::println);
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerComprasConfiteria() {
+        List<CompraConfiteria> comprasConfiteria = compraRepo.obtenerComprasConfiteria(1);
+        comprasConfiteria.forEach(System.out::println);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void obtenerDistribucionSillas() {
+        String distribucionSillas = compraRepo.obtenerDistribucionSillas(1);
+        System.out.println(distribucionSillas);
+    }
+
+    /*
     @Test
     @Sql("classpath:dataset.sql")
     public void calcularPrecioCompras() {
@@ -52,4 +68,6 @@ public class CompraTest {
                         o[0] + ", " + o[1] + ", " + o[2] + ", " + o[3] + ", " + o[4]
                 ));
     }
+
+     */
 }
