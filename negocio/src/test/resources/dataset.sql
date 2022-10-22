@@ -172,6 +172,7 @@ insert into compra values (6, 1, null, null, null, "1", 5);
 insert into compra values (7, 2, null, null, null, "1", 5);
 insert into compra values (8, 3, null, null, null, "1", 5);
 insert into compra values (9, 4, null, "NEQUI", null, "1", 5);
+
 /*
  (codigo, concepto, descuento)
  */
