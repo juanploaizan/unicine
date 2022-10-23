@@ -22,7 +22,6 @@ public interface PeliculaRepo extends JpaRepository<Pelicula, Integer> {
     @Query("select p from Pelicula p join p.generos g where g = :genero order by p.nombre asc")
     List<Pelicula> listarPeliculasPorGenero(Genero genero);
 
-<<<<<<< HEAD
     @Query("select p from Pelicula p where p.edadApropiada = :edadApropiada")
     List<Pelicula> listarPeliculasPorEdadApropiada(Integer edadApropiada);
 
@@ -32,7 +31,4 @@ public interface PeliculaRepo extends JpaRepository<Pelicula, Integer> {
     @Query("select p from Pelicula p where p.nombreEstudio = :nombreEstudio")
     List<Pelicula> listarPeliculasPorEstudio(String nombreEstudio);
 
-
-=======
->>>>>>> origin/main
 }

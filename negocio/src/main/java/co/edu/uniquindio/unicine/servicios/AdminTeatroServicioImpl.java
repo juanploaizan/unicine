@@ -57,7 +57,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
         return peliculaRepo.findById(codigo).orElse(null)!=null;
     }
 
-    private boolean verificarOcupacionSala(Sala sala,Horario horario) throws Exception {
+    private boolean verificarOcupacionSala(Sala sala,Horario horario) {
         if(sala==null){
             return false;
         }
@@ -77,7 +77,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Funcion actualizarFuncion(Funcion funcion) throws Exception {
         Optional<Funcion> guardado = funcionRepo.findByCodigo(funcion.getCodigo());
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("la funcion no existe");
         }
         return funcionRepo.save(funcion);
@@ -86,7 +86,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public void elimiarFuncion(Integer codigoFuncion) throws Exception{
         Optional<Funcion> guardado = funcionRepo.findByCodigo(codigoFuncion);
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("la funcion no existe");
         }
         funcionRepo.delete(guardado.get());
@@ -175,7 +175,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Sala actualizarSala(Sala sala)throws Exception {
         Optional<Sala> guardado = salaRepo.findByCodigo(sala.getCodigo());
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("La sala no existe");
         }
         return salaRepo.save(sala);
@@ -184,7 +184,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public void eliminarSala(Integer codigoSala)throws Exception {
         Optional<Sala> guardado = salaRepo.findByCodigo(codigoSala);
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("La sala no existe");
         }
         salaRepo.delete(guardado.get());
@@ -195,14 +195,6 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     public List<Sala> listarSalas() {
         return salaRepo.findAll();
     }
-
-
-/*
-    @Override
-    public List<Sala> listarSalaPorTipo(TipoSala tipoSala) {
-        return salaRepo.obtenerSalasPortipo(tipoSala);
-    }*/
-
 
     //Servicios horarios
     @Override
@@ -218,7 +210,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Horario actualizarHorario(Horario horario) throws Exception {
         Optional<Horario> guardado = horarioRepo.findByCodigo(horario.getCodigo());
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("la funcion no existe");
         }
         return horarioRepo.save(horario);
@@ -227,7 +219,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public void eliminarHorario(Integer horario)throws Exception {
         Optional<Horario> guardado = horarioRepo.findByCodigo(horario);
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("la funcion no existe");
         }
         horarioRepo.delete(guardado.get());
@@ -236,7 +228,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Horario buscarHorarioCodigo(Integer horario) throws Exception {
         Optional<Horario> h1 = horarioRepo.findByCodigo(horario);
-        if(h1.isEmpty()){
+        if(!h1.isPresent()){
             throw new Exception("Sala no existe");
         }
         return h1.get();
@@ -283,7 +275,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     @Override
     public Pelicula obtenerPeliculaCodigo(Integer codigoPelicula) throws Exception {
         Optional<Pelicula> guardado = peliculaRepo.findById(codigoPelicula);
-        if(guardado.isEmpty()){
+        if(!guardado.isPresent()){
             throw new Exception("La pelicula no existe");
         }
         return guardado.get();

@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,14 +73,14 @@ public class ClienteServicioTest {
     @Sql("classpath:dataset.sql")
     public void iniciarCompra() {
 
-        Cliente cliente = null;
+        Cliente cliente;
         try {
             cliente = clienteServicio.obtenerCliente("1");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        Funcion funcion = null;
+        Funcion funcion;
         try {
             funcion = funcionServicio.obtenerFuncion(5);
         } catch (Exception e) {
@@ -102,7 +100,7 @@ public class ClienteServicioTest {
     @Sql("classpath:dataset.sql")
     public void asignarEntradas() {
 
-        Compra compra = null;
+        Compra compra;
         try {
             compra = compraServicio.obtenerCompra(6);
         } catch (Exception e) {
@@ -134,7 +132,7 @@ public class ClienteServicioTest {
     @Sql("classpath:dataset.sql")
     public void asignarComprasConfiteria() {
 
-        Compra compra = null;
+        Compra compra;
         try {
             compra = compraServicio.obtenerCompra(7);
         } catch (Exception e) {
@@ -166,14 +164,14 @@ public class ClienteServicioTest {
     @Sql("classpath:dataset.sql")
     public void asignarPago() {
 
-        Compra compra = null;
+        Compra compra;
         try {
             compra = compraServicio.obtenerCompra(8);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-        ClienteCupon clienteCupon = null;
+        ClienteCupon clienteCupon;
         try {
             clienteCupon = cuponServicio.obtenerClienteCupon(1);
         } catch (Exception e) {
@@ -193,7 +191,7 @@ public class ClienteServicioTest {
     @Sql("classpath:dataset.sql")
     public void realizarCompra() {
 
-        Compra compra = null;
+        Compra compra;
         try {
             compra = compraServicio.obtenerCompra(9);
         } catch (Exception e) {
@@ -211,7 +209,7 @@ public class ClienteServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void cancelarCompra() {
-        Compra compra = null;
+        Compra compra;
         try {
             compra = compraServicio.obtenerCompra(9);
             clienteServicio.cancelarCompra(9);

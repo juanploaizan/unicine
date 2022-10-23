@@ -1,15 +1,11 @@
 package co.edu.uniquindio.unicine.servicios;
 
-<<<<<<< HEAD
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
-=======
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repositorios.*;
->>>>>>> origin/main
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -21,16 +17,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final PeliculaRepo peliculaRepo;
     private final CompraRepo compraRepo;
     private final EmailService emailService;
-    private final ProductoConfiteriaRepo productoConfiteriaRepo;
     private final FuncionRepo funcionRepo;
     private final ClienteCuponRepo clienteCuponRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, CompraRepo compraRepo, EmailService emailService, ProductoConfiteriaRepo productoConfiteriaRepo, FuncionRepo funcionRepo, ClienteCuponRepo clienteCuponRepo) {
+    public ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, CompraRepo compraRepo, EmailService emailService, FuncionRepo funcionRepo, ClienteCuponRepo clienteCuponRepo) {
         this.clienteRepo = clienteRepo;
         this.peliculaRepo = peliculaRepo;
         this.compraRepo = compraRepo;
         this.emailService = emailService;
-        this.productoConfiteriaRepo = productoConfiteriaRepo;
         this.funcionRepo = funcionRepo;
         this.clienteCuponRepo = clienteCuponRepo;
     }
@@ -51,7 +45,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         return clienteRepo.save(cliente);
     }
 
-    private boolean verificarExistenciaCorreo(String correo) throws Exception{
+    private boolean verificarExistenciaCorreo(String correo){
         Cliente cliente = clienteRepo.obtenerPorCorreo(correo);
         return !(cliente == null);
     }
@@ -93,14 +87,14 @@ public class ClienteServicioImpl implements ClienteServicio {
         return compraRepo.save(compra);
     }
 
-    private boolean verificarExistenciaCliente(String cedula) throws Exception{
+    private boolean verificarExistenciaCliente(String cedula) {
         Optional<Cliente> cliente = clienteRepo.findById(cedula);
         return (cliente.isPresent());
     }
 
-    private boolean verificarExistenciaFuncion(Funcion funcion) throws Exception{
+    private boolean verificarExistenciaFuncion(Funcion funcion) {
         Funcion funcionExiste = funcionRepo.verificarFuncion(funcion);
-        return (funcion != null);
+        return (funcionExiste != null);
     }
 
     @Override
@@ -122,7 +116,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     private boolean verificarEntradas(DistribucionSillas distribucionSillas, List<Entrada> entradas) throws Exception{
 
         String esquema = distribucionSillas.getEsquemaSillas();
-        int indexSilla = 0;
+        int indexSilla;
 
         for (Entrada entrada : entradas) {
             if (entrada.getColumna() > distribucionSillas.getColumnas()) return false;
@@ -174,7 +168,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         return compraRepo.save(compra);
     }
 
-    private boolean verificarProductosConfiteria(List<CompraConfiteria> comprasConfiteria) throws Exception {
+    private boolean verificarProductosConfiteria(List<CompraConfiteria> comprasConfiteria) {
 
         for (CompraConfiteria compraConfiteria : comprasConfiteria) {
             ProductoConfiteria productoConfiteria = compraRepo.obtenerProductoConfiteria(compraConfiteria.getCodigo());
@@ -214,7 +208,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         return false;
     }
 
-    private boolean verificarValidezCupon(ClienteCupon cupon) throws Exception{
+    private boolean verificarValidezCupon(ClienteCupon cupon) {
 
         if (cupon == null) return true;
         Cupon cuponCliente = clienteCuponRepo.obtenerCupon(cupon.getCodigo());

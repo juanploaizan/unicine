@@ -46,7 +46,7 @@ public interface AdministradorPlataformaServicio {
 
     Cupon obtenerCupon(Integer codigo) throws Exception;
 
-    Cupon registrarCupon(Cupon cupon) throws Exception;
+    Cupon registrarCupon(Cupon cupon);
 
     Cupon actualizarCupon(Cupon cupon) throws Exception;
 

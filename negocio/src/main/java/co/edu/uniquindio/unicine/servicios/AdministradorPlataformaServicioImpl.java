@@ -61,7 +61,7 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
         return administradorTeatroRepo.save(administradorTeatro);
     }
 
-    private boolean verificarExistenciaAdministradorTeatroCorreo(String correo) throws Exception{
+    private boolean verificarExistenciaAdministradorTeatroCorreo(String correo) {
         AdministradorTeatro administradorTeatro = administradorTeatroRepo.obtenerPorCorreo(correo);
         return !(administradorTeatro == null);
     }
@@ -94,8 +94,10 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
     }
 
     @Override
-    public AdministradorTeatro obtenerAdministradorPorTeatro(Integer codigoTeatro) throws Exception {
-        return administradorTeatroRepo.obtenerPorTeatro(codigoTeatro);
+    public AdministradorTeatro obtenerAdministradorPorTeatro(Integer codigoTeatro) throws Exception{
+        AdministradorTeatro admin = administradorTeatroRepo.obtenerPorTeatro(codigoTeatro);
+        if(admin == null) throw new Exception("El administrador buscado no existe.");
+        return admin;
     }
 
     @Override
@@ -179,14 +181,8 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
     }
 
     @Override
-    public Cupon registrarCupon(Cupon cupon) throws Exception {
-        Optional<Cupon> cuponExiste = cuponRepo.findById(cupon.getCodigo());
-
-        if (cuponExiste.isPresent()) {
-            throw new Exception("El codigo ingresado ya está siendo usado para otro cupón.");
-        } else {
-            return cuponRepo.save(cupon);
-        }
+    public Cupon registrarCupon(Cupon cupon) {
+        return cuponRepo.save(cupon);
     }
 
     @Override

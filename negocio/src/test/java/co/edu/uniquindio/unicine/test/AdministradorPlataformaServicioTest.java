@@ -52,8 +52,8 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarAdministradorTeatroTest() {
-        AdministradorTeatro administradorTeatro = null;
 
+        AdministradorTeatro administradorTeatro;
         try {
             administradorTeatro = administradorPlataformaServicio.obtenerAdministradorTeatro("1000");
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class AdministradorPlataformaServicioTest {
 
         try {
             administradorTeatro.setNombre_completo("Martin Tiringuin");
-            AdministradorTeatro nuevo = null;
+            AdministradorTeatro nuevo;
             nuevo = administradorPlataformaServicio.actualizarAdministradorTeatro(administradorTeatro);
             Assertions.assertEquals("Martin Tiringuin", nuevo.getNombre_completo());
         } catch (Exception e) {
@@ -129,14 +129,14 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarPelicula() {
-        Pelicula pelicula = null;
 
+        Pelicula pelicula;
         try {
             pelicula = administradorPlataformaServicio.obtenerPelicula(1);
             pelicula.setNombre("Efecto Mariposa");
-            Pelicula nueva = null;
+            Pelicula nueva;
             nueva = administradorPlataformaServicio.actualizarPelicula(pelicula);
-            Assertions.assertEquals("Efecto Mariposa", pelicula.getNombre());
+            Assertions.assertEquals("Efecto Mariposa", nueva.getNombre());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -203,10 +203,10 @@ public class AdministradorPlataformaServicioTest {
     @Sql("classpath:dataset.sql")
     public void registrarCuponTest() {
         Cupon cupon = Cupon.builder().concepto("Descuento por gigachad").descuento(25F).build();
-        cupon.setCodigo(10);
 
         try {
             Cupon nuevo = administradorPlataformaServicio.registrarCupon(cupon);
+            System.out.println(nuevo.getCodigo());
             Assertions.assertNotNull(cupon);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -216,14 +216,14 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarCuponTest() {
-        Cupon cupon = null;
 
+        Cupon cupon;
         try {
             cupon = administradorPlataformaServicio.obtenerCupon(1);
             cupon.setConcepto("Descuento por votacion");
-            Cupon nuevo = null;
+            Cupon nuevo;
             nuevo = administradorPlataformaServicio.actualizarCupon(cupon);
-            Assertions.assertEquals("Descuento por votacion", cupon.getConcepto());
+            Assertions.assertEquals("Descuento por votacion", nuevo.getConcepto());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -249,7 +249,7 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void listarCuponesPorDescuentoTest() {
-        List<Cupon> lista = administradorPlataformaServicio.listarCuponesPorDescuento(Float.valueOf(10));
+        List<Cupon> lista = administradorPlataformaServicio.listarCuponesPorDescuento(10F);
         lista.forEach(System.out::println);
     }
 
@@ -282,14 +282,14 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarProductoConfiteriaTest() {
-        ProductoConfiteria productoConfiteria = null;
 
+        ProductoConfiteria productoConfiteria;
         try {
             productoConfiteria = administradorPlataformaServicio.obtenerProductoConfiteria(1);
             productoConfiteria.setNombre("Fetuccini A La Carbonara");
-            ProductoConfiteria nuevo = null;
+            ProductoConfiteria nuevo;
             nuevo = administradorPlataformaServicio.actualizarProductoConfiteria(productoConfiteria);
-            Assertions.assertEquals("Fetuccini A La Carbonara", productoConfiteria.getNombre());
+            Assertions.assertEquals("Fetuccini A La Carbonara", nuevo.getNombre());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -347,14 +347,14 @@ public class AdministradorPlataformaServicioTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarCiudadTest() {
-        Ciudad ciudad = null;
 
+        Ciudad ciudad;
         try {
             ciudad = administradorPlataformaServicio.obtenerCiudad(1);
             ciudad.setNombre("Jonia");
-            Ciudad nuevo = null;
+            Ciudad nuevo;
             nuevo = administradorPlataformaServicio.actualizarCiudad(ciudad);
-            Assertions.assertEquals("Jonia", ciudad.getNombre());
+            Assertions.assertEquals("Jonia", nuevo.getNombre());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

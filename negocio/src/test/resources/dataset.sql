@@ -199,8 +199,6 @@ insert into entrada values (2, 10, 'D', 7800, 7);
 insert into entrada values (9, 11, 'D', 7800, 8); -- Estado confiteria
 insert into entrada values (10, 11, 'D', 7800, 8);
 
-<<<<<<< HEAD
-=======
 insert into entrada values (11, 11, 'D', 7800, 9); -- Estado confiteria
 insert into entrada values (12, 11, 'D', 7800, 9);
 
@@ -214,7 +212,7 @@ insert into entrada values (8, 10, 'B', 6000, 1);
 /*
  (codigo, extras, imagenProducto, nombre, precio)
  */
->>>>>>> origin/main
+
 insert into producto_confiteria values (1, null, "url-imagen-producto", "Combo 1", 22000);
 insert into producto_confiteria values (2, null, "url-imagen-producto", "Combo 2", 18000);
 insert into producto_confiteria values (3, null, "url-imagen-producto", "Combo 3", 35600);
