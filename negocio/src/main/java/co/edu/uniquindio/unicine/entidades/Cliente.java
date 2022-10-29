@@ -49,7 +49,7 @@ public class Cliente implements Serializable {
     private String imagen_perfil;
 
     @Column(length = 25)
-    private String estado;
+    private String estado = "NO_VERIFICADO";
 
     @Column(nullable = false, length = 40)
     @ToString.Exclude
@@ -79,7 +79,6 @@ public class Cliente implements Serializable {
         this.email = email;
         this.telefonos = telefonos;
         this.imagen_perfil = imagen_perfil;
-        this.estado = "NO_VERIFICADO";
         this.contrasenia = contrasenia;
     }
 }

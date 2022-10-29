@@ -37,7 +37,7 @@ public class ClienteServicioTest {
     @Sql("classpath:dataset.sql")
     public void registrarClienteTest() {
         Cliente cliente = Cliente.builder().nombre_completo("Juanito").contrasenia("1234").email("juanp.loaizan@uqvirtual.edu.co")
-                .cedula("1004916493").edad(20).direccion("Casa 1").imagen_perfil("url_imagen").build();
+                .cedula("1004916494").edad(20).direccion("Casa 1").imagen_perfil("url_imagen").build();
 
         try {
             Cliente nuevo = clienteServicio.registrarCliente(cliente);

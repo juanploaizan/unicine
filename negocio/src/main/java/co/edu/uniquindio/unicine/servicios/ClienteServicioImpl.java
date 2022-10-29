@@ -40,9 +40,10 @@ public class ClienteServicioImpl implements ClienteServicio {
         boolean correoExiste = verificarExistenciaCorreo(cliente.getEmail());
         if (correoExiste) throw new Exception("El correo ingresado ya está siendo usado por otro usuario.");
 
-        emailService.enviarEmail("¡Bienvenido a Unicine, " + cliente.getNombreCompleto() + "!",
-                "Te has registrado en nuestra plataforma. Para confirmar tu correo ingresa al siguiente link: \n" + "Aquí iría el enlace", cliente.getEmail());
-        return clienteRepo.save(cliente);
+        Cliente registro = clienteRepo.save(cliente);
+        emailService.enviarEmail("¡Bienvenido a Unicine!",
+                "Te has registrado en nuestra plataforma. Para confirmar tu correo ingresa al siguiente link: ..." + "Aquí iría el enlace", cliente.getEmail());
+        return registro;
     }
 
     private boolean verificarExistenciaCorreo(String correo){

@@ -44,7 +44,6 @@ public class Compra implements Serializable {
     @OneToMany(mappedBy = "compra")
     private List<Entrada> entradas;
 
-    @ToString.Exclude
     @NonNull
     @ManyToOne
     private Cliente cliente;

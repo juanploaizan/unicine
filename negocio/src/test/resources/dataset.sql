@@ -1,7 +1,7 @@
 /*
  (cedula, contrasenia, direccion, edad, email, estado, imagenPerfil, nombreCompleto)
  */
-insert into cliente values ("1", "pepe1", "direccion de mi casa", 20, "juanp.loaizan@uqvirtual.edu.co", "PRUEBA_0", "imagen-url", "Juan Pablo Loaiza");
+insert into cliente values ("1", "pepe1", "direccion de mi casa", 20, "juannp.loaizan@uqvirtual.edu.co", "PRUEBA_0", "imagen-url", "Juan Pablo Loaiza");
 insert into cliente values ("2", "pepe1", "direccion de mi casa", 20, "juanpedde@gnlkk.com", "PRUEBA", "imagen-url", "Alfonso");
 insert into cliente values ("3", "pepe1", "direccion de mi casa", 20, "juanpepec@gnlkk.com", "PRUEBA_0", "imagen-url", "Rodrigo");
 insert into cliente values ("4", "pepe1", "direccion de mi casa", 20, "juanpepsdcsdc@gnlkk.com", "PRUEBA", "imagen-url", "Sigifredo");
