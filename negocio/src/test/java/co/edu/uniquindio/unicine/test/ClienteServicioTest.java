@@ -154,6 +154,7 @@ public class ClienteServicioTest {
         try {
             Compra nuevaCompra = clienteServicio.asignarComprasConfiteria(compra, comprasConfiteria);
             System.out.println(nuevaCompra);
+            Assertions.assertNotNull(nuevaCompra);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -180,6 +181,7 @@ public class ClienteServicioTest {
         try {
             Compra nuevaCompra = clienteServicio.asignarPago(compra, MedioPago.NEQUI, clienteCupon);
             System.out.println(nuevaCompra);
+            Assertions.assertNotNull(nuevaCompra);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -200,6 +202,7 @@ public class ClienteServicioTest {
         try {
             Compra nuevaCompra = clienteServicio.realizarCompra(compra);
             System.out.println(nuevaCompra);
+            Assertions.assertNotNull(nuevaCompra);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -269,6 +272,23 @@ public class ClienteServicioTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void realizarPQRSTest() {
+        try {
+            Cliente cliente = clienteServicio.obtenerCliente("1");
+            PQRS pqrs = PQRS.builder().cliente(cliente).mensaje("Mensaje de prueba").motivo("Motivo de pureba").build();
+
+            PQRS pqrs1 = clienteServicio.realizarPqrs(pqrs);
+            System.out.println(pqrs1);
+            Assertions.assertNotNull(pqrs1);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     @Test

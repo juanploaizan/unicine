@@ -310,8 +310,6 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public PQRS realizarPqrs(PQRS solicitudPqrs) throws Exception {
-        Optional<PQRS> pqrsExiste = pqrsRepo.findById(solicitudPqrs.getCodigo()); //clienteRepo.findById(cliente.getCedula());
-        if (pqrsExiste.isPresent()) throw new Exception("Ya existe el pqrs.");
 
         if(solicitudPqrs.getCliente() == null) throw new Exception("El PQRS no tiene asociado ningún cliente.");
 

@@ -1,7 +1,7 @@
 /*
  (cedula, contrasenia, direccion, edad, email, estado, imagenPerfil, nombreCompleto)
  */
-insert into cliente values ("1", "pepe1", "direccion de mi casa", 20, "juannp.loaizan@uqvirtual.edu.co", "PRUEBA_0", "imagen-url", "Juan Pablo Loaiza");
+insert into cliente values ("1", "pepe1", "direccion de mi casa", 20, "juanp.loaizan@uqvirtual.edu.co", "PRUEBA_0", "imagen-url", "Juan Pablo Loaiza");
 insert into cliente values ("2", "pepe1", "direccion de mi casa", 20, "juanpedde@gnlkk.com", "PRUEBA", "imagen-url", "Alfonso");
 insert into cliente values ("3", "pepe1", "direccion de mi casa", 20, "juanpepec@gnlkk.com", "PRUEBA_0", "imagen-url", "Rodrigo");
 insert into cliente values ("4", "pepe1", "direccion de mi casa", 20, "juanpepsdcsdc@gnlkk.com", "PRUEBA", "imagen-url", "Sigifredo");
@@ -232,4 +232,8 @@ insert into compra_confiteria values (3, 54000, 3, 3, 2);
 insert into compra_confiteria values (4, 24000, 2, 1, 4);
 insert into compra_confiteria values (5, 35600, 1, 5, 3);
 
-
+insert into pqrs values (1, "2022-10-15", "Aquí va el mensaje 1", "Motivo de la solicitud 1", "1");
+insert into pqrs values (2, "2022-10-15", "Aquí va el mensaje 2", "Motivo de la solicitud 2", "1");
+insert into pqrs values (3, "2022-10-15", "Aquí va el mensaje 3", "Motivo de la solicitud 3", "1");
+insert into pqrs values (4, "2022-10-15", "Aquí va el mensaje 4", "Motivo de la solicitud 4", "1");
+insert into pqrs values (5, "2022-10-15", "Aquí va el mensaje 5", "Motivo de la solicitud 5", "1");
