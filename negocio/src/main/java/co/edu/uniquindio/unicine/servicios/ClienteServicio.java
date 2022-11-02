@@ -37,4 +37,5 @@ public interface ClienteServicio {
 
     void solicitarCambioContrasenia(String email) throws Exception;
 
+    PQRS realizarPqrs(PQRS solicitudPqrs) throws Exception;
 }

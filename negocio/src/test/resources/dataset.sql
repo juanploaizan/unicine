@@ -193,8 +193,8 @@ insert into cliente_cupon values (5, "ACTIVO", "2022-11-15", "4", null, 3);
 /*
  (codigo, columna, fila, precio, compraCodigo)
  */
-insert into entrada values (1, 11, 'D', 7800, 7); --Estado entradas
-insert into entrada values (2, 10, 'D', 7800, 7);
+insert into entrada values (1, 11, 'A', 7800, 7); --Estado entradas
+insert into entrada values (2, 10, 'A', 7800, 7);
 
 insert into entrada values (9, 11, 'D', 7800, 8); -- Estado confiteria
 insert into entrada values (10, 11, 'D', 7800, 8);

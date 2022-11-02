@@ -20,13 +20,16 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final FuncionRepo funcionRepo;
     private final ClienteCuponRepo clienteCuponRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, CompraRepo compraRepo, EmailService emailService, FuncionRepo funcionRepo, ClienteCuponRepo clienteCuponRepo) {
+    private final PQRSRepo pqrsRepo;
+
+    public ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, CompraRepo compraRepo, EmailService emailService, FuncionRepo funcionRepo, ClienteCuponRepo clienteCuponRepo, PQRSRepo pqrsRepo) {
         this.clienteRepo = clienteRepo;
         this.peliculaRepo = peliculaRepo;
         this.compraRepo = compraRepo;
         this.emailService = emailService;
         this.funcionRepo = funcionRepo;
         this.clienteCuponRepo = clienteCuponRepo;
+        this.pqrsRepo = pqrsRepo;
     }
 
     //Implementaciones
@@ -104,7 +107,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         if (compra.getEstado() < 1 || compra.getEstado() == 5) throw new Exception("La compra no ha sido asignada a ninguna función o cliente.");
         if (entradas.isEmpty()) throw new Exception("No se seleccionó ningún asiento");
 
-        boolean entradasValidas = verificarEntradas(compra.getFuncion().getSala().getDistribucionSillas(), entradas);
+        boolean entradasValidas = verificarEntradas(compra.getFuncion(), entradas);
 
         if (!entradasValidas) throw new Exception("Las sillas escogidas no son válidas");
 
@@ -114,23 +117,21 @@ public class ClienteServicioImpl implements ClienteServicio {
         return compraRepo.save(compra);
     }
 
-    private boolean verificarEntradas(DistribucionSillas distribucionSillas, List<Entrada> entradas) throws Exception{
+    private boolean verificarEntradas(Funcion funcion, List<Entrada> entradas) throws Exception{
 
-        String esquema = distribucionSillas.getEsquemaSillas();
-        int indexSilla;
+        List<Entrada> entradasFuncion = funcionRepo.obtenerEntradasFuncion(funcion.getCodigo());
+        if (entradasFuncion.isEmpty()) return true;
 
-        for (Entrada entrada : entradas) {
-            if (entrada.getColumna() > distribucionSillas.getColumnas()) return false;
-
-            try {
-                indexSilla = (hallarNumeroFila(entrada.getFila(), distribucionSillas.getColumnas()) + entrada.getColumna());
-            } catch (Exception e) {
-                throw new Exception("La fila escogida no es válida");
+        char fila;
+        int columna;
+        for (Entrada entrada : entradasFuncion) {
+            for (Entrada entradaEscogida : entradas) {
+                if (entradaEscogida == null) return false;
+                fila = entradaEscogida.getFila();
+                columna = entradaEscogida.getColumna();
+                if (entrada.getFila() == fila && entrada.getColumna() == columna)
+                    return false;
             }
-
-            System.out.println(esquema.charAt(indexSilla-1));
-            if (esquema.charAt(indexSilla-1) == 'o' || esquema.charAt(indexSilla) == ' ')
-                return false;
         }
         return true;
     }
@@ -305,5 +306,21 @@ public class ClienteServicioImpl implements ClienteServicio {
 
         emailService.enviarEmail("Cambio de contraseña",
                 "Para reestablecer tu contraseña, accede al siguiente enlace de recuperación: <br> aquí iría el link", cliente.getEmail());
+    }
+
+    @Override
+    public PQRS realizarPqrs(PQRS solicitudPqrs) throws Exception {
+        Optional<PQRS> pqrsExiste = pqrsRepo.findById(solicitudPqrs.getCodigo()); //clienteRepo.findById(cliente.getCedula());
+        if (pqrsExiste.isPresent()) throw new Exception("Ya existe el pqrs.");
+
+        if(solicitudPqrs.getCliente() == null) throw new Exception("El PQRS no tiene asociado ningún cliente.");
+
+        Optional<Cliente> clienteExiste =  clienteRepo.findById(solicitudPqrs.getCliente().getCedula());
+        if (!clienteExiste.isPresent()) throw new Exception("El cliente asociado al PQRS no existe.");
+
+        PQRS registro = pqrsRepo.save(solicitudPqrs);
+        emailService.enviarEmail("Solicitud PQRS",
+                "Has realizado una solicitud de pqrs. En aproximadamente 48 horas hábiles te estaremos dando una respuesta.", solicitudPqrs.getCliente().getEmail());
+        return registro;
     }
 }

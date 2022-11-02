@@ -111,10 +111,8 @@ public class ClienteServicioTest {
         Entrada entrada1 = null;
         Entrada entrada2 = null;
         try {
-            entrada1 = entradaServicio.obtenerEntrada(1);
-            entrada2 = entradaServicio.obtenerEntrada(2);
-            entrada1.setCompra(compra);
-            entrada2.setCompra(compra);
+            entrada1 = Entrada.builder().fila('B').columna(5).compra(compra).build();
+            entrada2 = Entrada.builder().fila('B').columna(6).compra(compra).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,6 +121,7 @@ public class ClienteServicioTest {
         try {
             Compra nuevaCompra = clienteServicio.asignarEntrada(compra, entradas);
             System.out.println(nuevaCompra);
+            Assertions.assertNotNull(nuevaCompra);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

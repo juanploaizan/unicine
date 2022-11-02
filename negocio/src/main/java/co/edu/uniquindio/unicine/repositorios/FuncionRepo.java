@@ -1,6 +1,7 @@
 package co.edu.uniquindio.unicine.repositorios;
 
 import co.edu.uniquindio.unicine.entidades.DistribucionSillas;
+import co.edu.uniquindio.unicine.entidades.Entrada;
 import co.edu.uniquindio.unicine.entidades.Funcion;
 import co.edu.uniquindio.unicine.entidades.Sala;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,7 +40,8 @@ public interface FuncionRepo extends JpaRepository<Funcion, Integer> {
 
    @Query("select f.precio from Funcion f where f.codigo=:codigoFuncion")
    Integer obtenerPrecionFuncion(Integer codigoFuncion);
-
+   @Query("select c.entradas from Compra c where c.funcion.codigo = :codigoFuncion")
+   List<Entrada> obtenerEntradasFuncion(Integer codigoFuncion);
    Optional<Funcion> findByCodigo(Integer codigo);
 
 }
