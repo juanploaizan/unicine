@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import static org.apache.logging.log4j.ThreadContext.isEmpty;
+
 @Service
 public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
@@ -19,13 +21,16 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     private final PeliculaRepo peliculaRepo;
 
-    public AdminTeatroServicioImpl(SalaRepo salaRepo, FuncionRepo funcionRepo, AdministradorTeatroRepo admiTeatroRepo, PQRSRepo PQRSRepo, HorarioRepo horarioRepo, PeliculaRepo peliculaRepo) {
+    private final TeatroRepo teatroRepo;
+
+    public AdminTeatroServicioImpl(SalaRepo salaRepo, FuncionRepo funcionRepo, AdministradorTeatroRepo admiTeatroRepo, PQRSRepo PQRSRepo, HorarioRepo horarioRepo, PeliculaRepo peliculaRepo, TeatroRepo teatroRepo) {
         this.salaRepo = salaRepo;
         this.funcionRepo = funcionRepo;
         this.admiTeatroRepo = admiTeatroRepo;
         this.PQRSRepo = PQRSRepo;
         this.horarioRepo = horarioRepo;
         this.peliculaRepo = peliculaRepo;
+        this.teatroRepo = teatroRepo;
     }
 
     @Override
@@ -280,4 +285,43 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
         }
         return guardado.get();
     }
+
+    @Override
+    public List<Teatro> listarTeatros() {
+        return teatroRepo.findAll();
+    }
+
+    @Override
+    public void eliminarTeatro(Integer codigo) throws Exception {
+        Optional<Teatro> teatro = teatroRepo.findById(codigo);
+        if(!teatro.isPresent()){
+            throw new Exception("El teatro no existe");
+        }
+        teatroRepo.delete(teatro.get());
+    }
+
+    @Override
+    public Teatro crearTeatro(Teatro teatro) throws Exception {
+
+        if (teatro.getCodigo() == null){
+            return teatroRepo.save(teatro);
+        }
+        Optional<Teatro> teatro1 = teatroRepo.findById(teatro.getCodigo());
+        if (!teatro1.isPresent()) {
+            return teatroRepo.save(teatro);
+        } else {
+            throw new Exception("Ya existe un teatro con este código");
+        }
+    }
+
+    @Override
+    public void actualizarTeatro(Teatro teatro) throws Exception {
+        Optional<Teatro> guardado = teatroRepo.findById(teatro.getCodigo());
+        if (!guardado.isPresent()) {
+            throw new Exception("El teatro no existe");
+        }
+        teatroRepo.save(teatro);
+    }
+
+
 }

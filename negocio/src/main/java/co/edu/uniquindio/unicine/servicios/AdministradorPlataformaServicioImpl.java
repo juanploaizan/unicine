@@ -15,14 +15,18 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
     private final CuponRepo cuponRepo;
     private final ProductoConfiteriaRepo productoConfiteriaRepo;
     private final CiudadRepo ciudadRepo;
-    private AdministradorPlataformaRepo administradorPlataformaRepo;
 
-    public AdministradorPlataformaServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, ProductoConfiteriaRepo productoConfiteriaRepo, CiudadRepo ciudadRepo) {
+    private final FuncionRepo funcionRepo;
+    private final AdministradorPlataformaRepo administradorPlataformaRepo;
+
+    public AdministradorPlataformaServicioImpl(AdministradorTeatroRepo administradorTeatroRepo, PeliculaRepo peliculaRepo, CuponRepo cuponRepo, ProductoConfiteriaRepo productoConfiteriaRepo, CiudadRepo ciudadRepo, FuncionRepo funcionRepo, AdministradorPlataformaRepo administradorPlataformaRepo) {
         this.administradorTeatroRepo = administradorTeatroRepo;
         this.peliculaRepo = peliculaRepo;
         this.cuponRepo = cuponRepo;
         this.productoConfiteriaRepo = productoConfiteriaRepo;
         this.ciudadRepo = ciudadRepo;
+        this.funcionRepo = funcionRepo;
+        this.administradorPlataformaRepo = administradorPlataformaRepo;
     }
 
     public AdministradorPlataforma login(String cedula, String contrasenia) throws Exception {
@@ -113,6 +117,11 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
 
     @Override
     public Pelicula registrarPelicula(Pelicula pelicula) throws Exception {
+
+        if (pelicula.getCodigo() == null) {
+            return peliculaRepo.save(pelicula);
+        }
+
         Optional<Pelicula> peliculaExiste = peliculaRepo.findById(pelicula.getCodigo());
 
         if (peliculaExiste.isPresent()) {
@@ -318,6 +327,11 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
     @Override
     public List<Ciudad> listarCiudades() {
         return ciudadRepo.findAll();
+    }
+
+    @Override
+    public List<Funcion> obtenerFuncionesPorCiudadPelicula(Integer codigoPelicula, Integer codigoCiudad) throws Exception {
+        return funcionRepo.obtenerFuncionesPorCiudadPelicula(codigoPelicula, codigoCiudad);
     }
 
 }

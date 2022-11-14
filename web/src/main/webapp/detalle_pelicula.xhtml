@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">#{detallePeliculaBean.pelicula.nombre}</ui:define>
+
+    <ui:define name="contenido">
+
+        <div class="contenido_pagina">
+
+            <div id="descripcion_pelicula" class="izquierda shadow p-3">
+
+                <img src="#{detallePeliculaBean.pelicula.imagenPrincipal}" alt="Poster película"/>
+
+                <h5 style="margin-top: 15px">Título de la película</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.nombre}" />
+
+                <h5 style="margin-top: 15px">Género/s</h5>
+                <p:outputLabel value="#{detallePeliculaBean.generosPelicula}" />
+
+                <h5 style="margin-top: 15px">Sinopsis</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.sinopsis}" />
+
+                <h5 style="margin-top: 15px">Director/es</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.nombreDirector}" />
+
+                <h5 style="margin-top: 15px">Estudio/productora</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.nombreEstudio}" />
+
+                <h5 style="margin-top: 15px">Reparto</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.edadApropiada}" />
+
+                <h5 style="margin-top: 15px">Duración</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.duracionMinutos}" />
+
+                <h5 style="margin-top: 15px">Clasificación (Edad apropiada)</h5>
+                <p:outputLabel value="#{detallePeliculaBean.pelicula.edadApropiada}" />
+            </div>
+
+            <div id="trailer_funciones" class="derecha shadow p-3">
+
+                <div style="align-content: center; width: 800px">
+                    <iframe width="775" height="500" src="#{detallePeliculaBean.pelicula.trailer}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true"></iframe>
+                </div>
+
+            </div>
+
+        </div>
+
+    </ui:define>
+</ui:composition>
+
+</html>

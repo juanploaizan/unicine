@@ -5,6 +5,8 @@ import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.repositorios.ClienteRepo;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repositorios.*;
+import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.jasypt.util.text.AES256TextEncryptor;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,15 +22,17 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final FuncionRepo funcionRepo;
     private final ClienteCuponRepo clienteCuponRepo;
 
+    private final CiudadRepo ciudadRepo;
     private final PQRSRepo pqrsRepo;
 
-    public ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, CompraRepo compraRepo, EmailService emailService, FuncionRepo funcionRepo, ClienteCuponRepo clienteCuponRepo, PQRSRepo pqrsRepo) {
+    public ClienteServicioImpl(ClienteRepo clienteRepo, PeliculaRepo peliculaRepo, CompraRepo compraRepo, EmailService emailService, FuncionRepo funcionRepo, ClienteCuponRepo clienteCuponRepo, CiudadRepo ciudadRepo, PQRSRepo pqrsRepo) {
         this.clienteRepo = clienteRepo;
         this.peliculaRepo = peliculaRepo;
         this.compraRepo = compraRepo;
         this.emailService = emailService;
         this.funcionRepo = funcionRepo;
         this.clienteCuponRepo = clienteCuponRepo;
+        this.ciudadRepo = ciudadRepo;
         this.pqrsRepo = pqrsRepo;
     }
 
@@ -43,9 +47,19 @@ public class ClienteServicioImpl implements ClienteServicio {
         boolean correoExiste = verificarExistenciaCorreo(cliente.getEmail());
         if (correoExiste) throw new Exception("El correo ingresado ya está siendo usado por otro usuario.");
 
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+        cliente.setContrasenia( spe.encryptPassword(cliente.getContrasenia()) );
+
+        cliente.setEstado("NO_VERIFICADO");
+
         Cliente registro = clienteRepo.save(cliente);
+
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword("teclado");
+        String param1 = textEncryptor.encrypt(registro.getEmail());
+
         emailService.enviarEmail("¡Bienvenido a Unicine!",
-                "Te has registrado en nuestra plataforma. Para confirmar tu correo ingresa al siguiente link: ..." + "Aquí iría el enlace", cliente.getEmail());
+                "¡Te has registrado en nuestra plataforma! Para confirmar tu correo, ingresa al siguiente link: " + "http://localhost:8081/activar_cuenta.xhtml?p1="+param1, cliente.getEmail());
         return registro;
     }
 
@@ -65,9 +79,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente login(String cedula, String contrasenia) throws Exception {
 
-        Cliente cliente = clienteRepo.comprobarAutenticacion(cedula, contrasenia);
+        Cliente cliente = clienteRepo.findById(cedula).orElse(null);
 
-        if (cliente == null) throw new Exception("Los datos de autenticación no son válidos.");
+        if (cliente == null) throw new Exception("No existe un usuario con la cédula ingresada");
+        if (cliente.getEstado().equals("NO_VERIFICADO")) throw new Exception("La cuenta del usuario está inactiva; ésta debe ser verificada a través del enlace enviado al correo");
+
+        StrongPasswordEncryptor spe = new StrongPasswordEncryptor();
+
+        if (!spe.checkPassword( contrasenia, cliente.getContrasenia())) throw new Exception("La contraseña ingresada es incorrecta");
 
         return cliente;
     }
@@ -286,7 +305,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         return clienteRepo.findAll();
     }
 
-    //TODO
+    //TODO realizar la consulta para obtener las compras del cliente
     @Override
     public List<Compra> listarHistorialCompras(String cedulaCliente) throws Exception{
 
@@ -321,4 +340,45 @@ public class ClienteServicioImpl implements ClienteServicio {
                 "Has realizado una solicitud de pqrs. En aproximadamente 48 horas hábiles te estaremos dando una respuesta.", solicitudPqrs.getCliente().getEmail());
         return registro;
     }
+
+    @Override
+    public List<Pelicula> listarPeliculasPorEstadoCiudad(String estado, Integer codigoCiudad) throws Exception {
+
+        Optional<Ciudad> guardada = ciudadRepo.findById(codigoCiudad);
+        if (!guardada.isPresent()) {
+            throw new Exception("La ciudad buscada no se encuentra registrada.");
+        }
+        return peliculaRepo.buscarPeliculasPorEstadoCiudad(estado, codigoCiudad);
+    }
+
+    @Override
+    public List<Pelicula> listarPeliculasPorEstado(String estado) throws Exception {
+        return peliculaRepo.buscarPeliculasPorEstado(estado);
+    }
+
+    @Override
+    public Compra obtenerCompra(Integer codigoCompra) throws Exception {
+        return compraRepo.findById(codigoCompra).orElseThrow( () -> new Exception("No se encontró la compra"));
+    }
+
+    @Override
+    public void activarCuenta(String param1) throws Exception {
+
+        param1 = param1.replace(" ", "+");
+
+        AES256TextEncryptor textEncryptor = new AES256TextEncryptor();
+        textEncryptor.setPassword("teclado");
+        String correoDes = textEncryptor.decrypt(param1);
+
+
+        Cliente guardado = clienteRepo.obtenerPorCorreo(correoDes);
+
+        if (guardado == null) throw new Exception("El cliente no existe");
+
+        guardado.setEstado("VERIFICADO");
+        clienteRepo.save(guardado);
+
+        //TODO crear el cupon de bienvenida para el cliente guardado
+    }
+
 }

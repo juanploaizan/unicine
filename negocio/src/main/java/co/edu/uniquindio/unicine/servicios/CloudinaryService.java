@@ -11,7 +11,6 @@ import java.util.Map;
 public class CloudinaryService {
 
     private Cloudinary cloudinary;
-
     private Map<String, String> config;
 
     public CloudinaryService() {
@@ -19,13 +18,11 @@ public class CloudinaryService {
         config.put("cloud_name", "djrslfkmr");
         config.put("api_key", "928966742378797");
         config.put("api_secret", "hqxKTuqBQKOv3-yiMFJBTcH6-aU");
-
         cloudinary = new Cloudinary(config);
-
     }
 
     public Map subirImagen(File file, String carpeta) throws Exception {
-        Map respuesta = cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", carpeta));
+        Map respuesta = cloudinary.uploader().upload(file, ObjectUtils.asMap("folder", String.format("unicine/%s", carpeta)));
         return respuesta;
     }
 

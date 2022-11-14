@@ -62,4 +62,12 @@ public interface AdminTeatroServicio {
     //Servicios sobre las "Peliculas"
     Pelicula obtenerPeliculaCodigo(Integer codigoPelicula) throws Exception;
 
+    List<Teatro> listarTeatros();
+
+
+    void eliminarTeatro(Integer codigo) throws Exception;
+
+    Teatro crearTeatro(Teatro teatro) throws Exception;
+
+    void actualizarTeatro(Teatro teatro) throws Exception;
 }

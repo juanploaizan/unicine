@@ -36,6 +36,9 @@ public class Compra implements Serializable {
     @Column(nullable = false)
     private Integer estado;
 
+    @Column(nullable = false)
+    private LocalDateTime fechaPelicula;
+
     //Relaciones
 
     @OneToOne(mappedBy = "compra")

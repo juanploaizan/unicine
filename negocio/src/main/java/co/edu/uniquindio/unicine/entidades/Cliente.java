@@ -51,7 +51,8 @@ public class Cliente implements Serializable {
     @Column(length = 25)
     private String estado = "NO_VERIFICADO";
 
-    @Column(nullable = false, length = 40)
+
+    @Column(nullable = false, length = 200)
     @ToString.Exclude
     private String contrasenia;
 

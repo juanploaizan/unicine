@@ -21,6 +21,7 @@ public interface ClienteServicio {
 
     List<Cliente> listarClientes() ;
 
+    //TODO corregir el servicio
     List<Compra> listarHistorialCompras(String cedulaCliente) throws Exception;
 
     Compra iniciarCompra(Cliente cliente, Funcion funcion) throws Exception;
@@ -38,4 +39,13 @@ public interface ClienteServicio {
     void solicitarCambioContrasenia(String email) throws Exception;
 
     PQRS realizarPqrs(PQRS solicitudPqrs) throws Exception;
+
+    List<Pelicula> listarPeliculasPorEstadoCiudad(String estado, Integer codigoCiudad) throws Exception;
+    List<Pelicula> listarPeliculasPorEstado(String estado) throws Exception;
+
+    Compra obtenerCompra(Integer codigoCompra) throws Exception;
+
+    void activarCuenta(String param1) throws Exception;
+
+
 }

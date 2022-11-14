@@ -4,15 +4,124 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Página de Inicio</title>
-</h:head>
 
-<h:body>
-    <h1>Página de inicio </h1>
-</h:body>
+<ui:composition template="/WEB-INF/template.xhtml">
+
+    <ui:define name="contenido">
+
+        <div class="imagenes-inicio">
+            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <p:repeat value="#{inicioBean.imagenes}" var="imagen" varStatus="i" >
+                        <button type="button" data-bs-target="#{myCarousel}" data-bs-slide-to="#{i.index}" class="#{i.index == 0 ? 'active' : ''}" aria-current="true" aria-label="Slide 1"></button>
+                    </p:repeat>
+                </div>
+                <div class="carousel-inner">
+                    <p:repeat value="#{inicioBean.imagenes}" var="imagen" varStatus="i" >
+                        <div class="carousel-item #{i.index == 0 ? 'active' : ''}">
+                            <img src="#{imagen}" alt="Imagen" class="bd-placeholder-img img-carouselz"/>
+
+                            <div class="container">
+                                <div class="carousel-caption text-start">
+                                    <h1>Example headline.</h1>
+                                    <p>Some representative placeholder content for the first slide of the carousel.</p>
+                                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </p:repeat>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="cuerpo_pagina">
+            <div jsf:id="listas_peliculas" class="container">
+                <div class="cartelera">
+                    <h2 class="mt-5 mb-5">En cartelera</h2>
+                    <div class="row">
+                        <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                            <div class="col-md-6">
+                                <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}"
+                                   class="text-decoration-none">
+                                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item_pelicula">
+                                        <div class="col p-4 d-flex flex-column position-static">
+                                            <div class="d-inline-block mb-2"><p:repeat value="#{pelicula.generos}" var="genero"> <p:chip label="#{genero}" styleClass="me-2 chip-genero"/> </p:repeat></div>
+                                            <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                            <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
+                                        </div>
+                                        <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                            <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}"/>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </p:repeat>
+                    </div>
+                </div>
+                <hr class="mt-5"/>
+                <div class="proximamente mb-5">
+                    <h2 class="mt-5 mb-5">Próximamente</h2>
+                    <div class="row">
+                        <p:repeat value="#{inicioBean.peliculasProximamente}" var="pelicula">
+                            <div class="col-md-6">
+                                <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}"
+                                   class="text-decoration-none">
+                                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item_pelicula">
+                                        <div class="col p-4 d-flex flex-column position-static">
+                                            <div class="d-inline-block mb-2"><p:repeat value="#{pelicula.generos}"
+                                                                                       var="genero"> <p:chip
+                                                    label="#{genero}" styleClass="me-2 chip-genero"/> </p:repeat></div>
+                                            <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                            <p class="card-text mb-auto">#{pelicula.sinopsis}</p>
+                                        </div>
+                                        <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                            <img src="#{pelicula.imagenPrincipal}" alt="#{pelicula.nombre}"/>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </p:repeat>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p:dialog id="dialogo_ciudad" widgetVar="dialogo_ciudad" modal="true" visible="#{seguridadBean.ciudad == null ? 'true' : 'false'}"
+                  header="Seleccionar ciudad">
+            <h:form>
+                <h:panelGrid columns="3" cellpadding="5">
+
+                    <p:outputLabel for="ciudad_origen" value="Ciudad: "/>
+
+                    <p:selectOneMenu id="ciudad_origen" value="#{inicioBean.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Elige la ciudad de la función: " noSelectionOption="true"
+                                      itemValue="#{null}"/>
+                        <f:selectItems value="#{inicioBean.ciudades}" var="ciudad" itemLabel="#{ciudad.nombre}"
+                                       itemValue="#{ciudad}"/>
+                        <p:ajax event="change" listener="#{inicioBean.elegirCiudad()}" update="@form, listas_peliculas" />
+                    </p:selectOneMenu>
+
+                    <p:message for="ciudad_origen"/>
+
+                </h:panelGrid>
+                <p:commandButton value="Seleccionar ciudad" action="#{seguridadBean.seleccionarCiudad(inicioBean.ciudad)}" styleClass="mt-4"
+                                 icon="pi pi-check"
+                                 oncomplete="PF('dialogo_ciudad').hide()"/>
+                <p:growl for="mensaje_bean" showDetail="true"/>
+            </h:form>
+        </p:dialog>
+    </ui:define>
+</ui:composition>
 </html>

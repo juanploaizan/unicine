@@ -1,9 +1,12 @@
 package co.edu.uniquindio.unicine.entidades;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -21,9 +24,11 @@ public class Pelicula implements Serializable {
     @EqualsAndHashCode.Include
     private Integer codigo;
 
+    @Length(max = 65)
     @Column(nullable = false, length = 65)
     private String nombre;
 
+    @Lob
     @Column(nullable = false)
     private String sinopsis;
 
@@ -33,9 +38,11 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private Integer edadApropiada;
 
+    @Length(max = 65)
     @Column(nullable = false, length = 65)
     private String nombreDirector;
 
+    @Length(max = 65)
     @Column(nullable = false, length = 65)
     private String nombreEstudio;
 
@@ -44,8 +51,9 @@ public class Pelicula implements Serializable {
     @Column(nullable = false, length = 40)
     private List<Reparto> reparto;
 
+    @ElementCollection
     @Column(nullable = false)
-    private String imagen;
+    private Map<String, String> imagenes;
 
     @Column(nullable = false, unique = true)
     private String trailer;
@@ -56,7 +64,7 @@ public class Pelicula implements Serializable {
     private List<Genero> generos;
 
     @Column(nullable = false, length = 40)
-    private String estadoPelicula;
+    private String estadoPelicula = "CREADA";
 
     //Relaciones
 
@@ -66,8 +74,7 @@ public class Pelicula implements Serializable {
 
     @Builder
     public Pelicula(String nombre, String sinopsis, Integer duracion_minutos, Integer edad_apropiada,
-                    String nombre_director, String nombre_estudio, List<Reparto> reparto,
-                    String imagen, String trailer, List<Genero> generos, String estadoPelicula) {
+                    String nombre_director, String nombre_estudio, List<Reparto> reparto, String trailer, List<Genero> generos) {
         this.nombre = nombre;
         this.sinopsis = sinopsis;
         this.duracionMinutos = duracion_minutos;
@@ -75,9 +82,16 @@ public class Pelicula implements Serializable {
         this.nombreDirector = nombre_director;
         this.nombreEstudio = nombre_estudio;
         this.reparto = reparto;
-        this.imagen = imagen;
         this.trailer = trailer;
         this.generos = generos;
-        this.estadoPelicula = estadoPelicula;
+        this.estadoPelicula = "CREADO";
+    }
+
+    public String getImagenPrincipal() {
+        if (!imagenes.isEmpty()){
+            String primera = imagenes.keySet().toArray()[0].toString();
+            return imagenes.get(primera);
+        }
+        return "";
     }
 }

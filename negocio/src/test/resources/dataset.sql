@@ -1,11 +1,11 @@
 /*
  (cedula, contrasenia, direccion, edad, email, estado, imagenPerfil, nombreCompleto)
  */
-insert into cliente values ("1", "pepe1", "direccion de mi casa", 20, "juanp.loaizan@uqvirtual.edu.co", "PRUEBA_0", "imagen-url", "Juan Pablo Loaiza");
-insert into cliente values ("2", "pepe1", "direccion de mi casa", 20, "juanpedde@gnlkk.com", "PRUEBA", "imagen-url", "Alfonso");
-insert into cliente values ("3", "pepe1", "direccion de mi casa", 20, "juanpepec@gnlkk.com", "PRUEBA_0", "imagen-url", "Rodrigo");
-insert into cliente values ("4", "pepe1", "direccion de mi casa", 20, "juanpepsdcsdc@gnlkk.com", "PRUEBA", "imagen-url", "Sigifredo");
-insert into cliente values ("5", "pepe1", "direccion de mi casa", 20, "juanpcdepe@gnlkk.com", "PRUEBA_0", "imagen-url", "Roberto");
+insert into cliente values ("1", "/Cgi48EN8rKo0ZAyJk1nPtGsVhhvhanOAItnCZ0KlyyCF8yM1PU1U/cI6oEBX81j", "direccion de mi casa", 20, "juanp.loaizan@uqvirtual.edu.co", "VERIFICADO", "imagen-url", "Juan Pablo Loaiza");
+insert into cliente values ("2", "/Cgi48EN8rKo0ZAyJk1nPtGsVhhvhanOAItnCZ0KlyyCF8yM1PU1U/cI6oEBX81j", "direccion de mi casa", 20, "juanpedde@gnlkk.com", "VERIFICADO", "imagen-url", "Alfonso");
+insert into cliente values ("3", "/Cgi48EN8rKo0ZAyJk1nPtGsVhhvhanOAItnCZ0KlyyCF8yM1PU1U/cI6oEBX81j", "direccion de mi casa", 20, "juanpepec@gnlkk.com", "VERIFICADO", "imagen-url", "Rodrigo");
+insert into cliente values ("4", "/Cgi48EN8rKo0ZAyJk1nPtGsVhhvhanOAItnCZ0KlyyCF8yM1PU1U/cI6oEBX81j", "direccion de mi casa", 20, "juanpepsdcsdc@gnlkk.com", "VERIFICADO", "imagen-url", "Sigifredo");
+insert into cliente values ("5", "/Cgi48EN8rKo0ZAyJk1nPtGsVhhvhanOAItnCZ0KlyyCF8yM1PU1U/cI6oEBX81j", "direccion de mi casa", 20, "juanpcdepe@gnlkk.com", "NO_VERIFICADO", "imagen-url", "Roberto");
 
 /*
  (cedulaCliente, telefono)
@@ -37,8 +37,8 @@ insert into tipo_sala values (3, "4D", 9600);
  (codigo, columnas, esquemaDeSillas, filas, totalSillas)
  */
 insert into distribucion_sillas values(1, 11,
-   "xxxxxxxxxxx
-    xxxxxxxxxxx
+"xxxxxxxxxxx
+xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
@@ -47,6 +47,7 @@ xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx", 10, 110);
+
 insert into distribucion_sillas values(2, 11,
 "xxxxxxxxxxx
 xxxxxxxxxxx
@@ -58,19 +59,8 @@ xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx", 10, 110);
+
 insert into distribucion_sillas values(3, 11,
-"xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx
-xxxxxxxxxxx", 10, 110);
-insert into distribucion_sillas values(4, 17, "xxxxx x x x   x x xxxxxx", 7, 190);
-insert into distribucion_sillas values(5, 11,
 "xxxxxxxxxxx
 xxxxxxxxxxx
 xxxxxxxxxxx
@@ -106,7 +96,7 @@ insert into administrador_teatro values ("5000", "1234", "jloasitsi@email.com", 
 insert into teatro values (1, "Barrio la aguapanela calle 2", "C.C Armenia", "1000", 1);
 insert into teatro values (2, "Direccion equis de Pereira", "C.C Pereira", "5000", 2);
 insert into teatro values (3, "Otra direccion, pero de Manizales", "C.C Unicentro", "2000", 3);
-insert into teatro values (4, "Avenida Centenario, cerca al round point", "C.C Calima", "3000", 4);
+insert into teatro values (4, "Avenida Centenario, cerca al round point", "C.C Calima", "3000", 1);
 insert into teatro values (5, "Por la 14, con KFC se reconoce de una", "C.C Portal del Quindio", "4000", 1);
 
 /*
@@ -114,34 +104,42 @@ insert into teatro values (5, "Por la 14, con KFC se reconoce de una", "C.C Port
  */
 insert into sala values (1, 1, 1, 4, 1);
 insert into sala values (2, 2, 1, 4, 1);
-insert into sala values (3, 1, 4, 2, 2);
-insert into sala values (4, 1, 5, 5, 1);
+insert into sala values (3, 1, 3, 2, 2);
+insert into sala values (4, 1, 2, 5, 1);
 insert into sala values (5, 2, 1, 5, 2);
 insert into sala values (6, 3, 1, 5, 1);
 insert into sala values (7, 4, 1, 5, 3);
 insert into sala values (8, 1, 1, 1, 1);
 
 /*
- (codigo, duracionMinutos, edadApropiada, estado, imagen, nombre, nombreDirector, nombreEstudio, sinopsis, trailer)
+ (codigo, duracionMinutos, edadApropiada, estado, nombre, nombreDirector, nombreEstudio, sinopsis, trailer)
  */
-insert into pelicula values (1, 120, 7, "EN_CARTELERA", "urlImagen", "Las Aventuras del Pescado",
-                             "Antonio Director", "Universal", "sinopsis larga", "urlTrailer1");
-insert into pelicula values (2, 152, 14, "EN_CARTELERA", "urlImagen", "Un aguacate en el desierto",
-                             "Unos directores", "Marvel", "sinopsis larga", "urlTrailer2");
-insert into pelicula values (3, 131, 14, "PROXIMAMENTE", "urlImagen", "Mandingo",
-                             "Otros directores", "21th Fox", "sinopsis larga", "urlTrailer3");
-insert into pelicula values (4, 110, 7, "FINALIZADA", "urlImagen", "Habia una vez una pelicula",
-                             "Mi amigo el fotografo", "Disney", "sinopsis larga", "urlTrailer4");
-insert into pelicula values (5, 98, 18, "EN_CARTELERA", "urlImagen", "Terror en la ciudad de Armenia",
-                             "Pepe Aguilar", "Paramount", "sinopsis larga", "urlTrailer5");
+insert into pelicula values (1, 161, 12, "EN_CARTELERA", "Pantera Negra: Wakanda Por Siempre",
+                             "Ryan Coogler", "Marvel Studios", "La reina Ramonda (Angela Bassett), Shuri (Letitia Wright), M''Baku (Winston Duke), Okoye (Danai Gurira) y las Dora Milaje (incluida Florence Kasumba) luchan por proteger a su nación de las potencias mundiales que intervienen tras la muerte del Rey T''Challa. Mientras los habitantes de Wakanda se esfuerzan por embarcarse en un nuevo capítulo, los héroes deben unirse con la ayuda de War Dog Nakia (Lupita Nyong''o) y Everett Ross (Martin Freeman) y forjar un nuevo camino para el reino de Wakanda. El film que cuenta con Tenoch Huerta como Namor, rey de una nación submarina oculta, también está protagonizada por Dominique Thorne, Michaela Coel, Mabel Cadena y Alex Livanalli.", "https://www.youtube.com/embed/BPjbiZQmBI4");
 
+insert into pelicula values (2, 124, 12, "EN_CARTELERA", "Black Adam",
+                             "Jaume Collet-Serra", "DC", "Casi 5.000 años después de haber sido dotado de los poderes omnipotentes de los antiguos dioses -y encarcelado con la misma rapidez-, Black Adam (Johnson) es liberado de su tumba terrenal, listo para desatar su forma única de justicia en el mundo moderno.", "https://www.youtube.com/embed/kOFTZWyaOgc");
+
+insert into pelicula values (3, 93, 12, "EN_CARTELERA", "La Luz del Diablo",
+                             "Daniel Stamn", "Gold Circle Films", "La Hermana Ann cree que está respondiendo a un llamado para ser la primera mujer exorcista... Pero ¿quién o qué la llamó? En respuesta a un aumento mundial de las posesiones demoníacas, ella buscará un lugar en una escuela de exorcismo reabierta por la Iglesia Católica. Hasta ahora, estas escuelas solo han enseñado el Rito del Exorcismo a sacerdotes. Sin embargo, un profesor y experto exorcista, reconoce los dones de la Hermana Ann y accede a capacitarla. Empujada a su primera experiencia junto a su compañero de estudios, el Padre Dante (Christian Navarro), la Hermana Ann se enfrentará a la batalla por el alma de una niña. Y ella empezará a sentir que la menor está poseída por el mismo demonio que atormentó a su propia madre hace años. Decidida a erradicar el mal, Ann pronto se dará cuenta de que el Diablo la tiene justo donde la quiere.", "https://www.youtube.com/watch?v=cqQwSbNhN50&ab_channel=TrailersInSpanish");
+
+insert into pelicula values (4, 190, 7, "PROXIMAMENTE", "Avatar: El Camino Del Agua",
+                             "James Cameron", "20th Century Studios", "Ambientada más de una década después de los sucesos que tuvieron lugar en la primera película, AVATAR: EL CAMINO DEL AGUA narra la historia de la familia Sully (Jake, Neytiri y sus hijos), el peligro que los persigue, los esfuerzos que hacen para mantenerse a salvo, las batallas que libran para seguir con vida, y las tragedias que sobrellevan. Dirigida por James Cameron y producida por Cameron y Jon Landau, la película es protagonizada por Zoe Saldana, Sam Worthington, Sigourney Weaver, Stephen Lang, Cliff Curtis, Joel David Moore, CCH Pounder, Edie Falco, Jemaine Clement, Giovanni Ribisi y Kate Winslet.", "https://www.youtube.com/watch?v=u0hxjdWG84k&t=2s&ab_channel=SensaCineTRAILERS");
+
+insert into pelicula values (5, 102, 7, "PROXIMAMENTE", "Un Mundo Extraño",
+                             "Don Hall (Director), Qui Nguyen (Co-Director).", "Walt Disney Studios Motion Pictures", "La nueva película de Walt Disney Animation Studios, presenta un viaje de acción y aventura que transcurre en una tierra inexplorada y traicionera, donde criaturas fantásticas aguardan a los legendarios Clade, una familia de exploradores cuyas diferencias amenazan con derribar su última misión que es, por lejos, la más decisiva.", "https://www.youtube.com/watch?v=LvIMiuYG6KQ&ab_channel=DisneyLatinoam%C3%A9rica");
+
+insert into pelicula_imagenes values (1, "https://res.cloudinary.com/djrslfkmr/image/upload/v1668454030/unicine/peliculas/cc8fdbb388a4-480x670_kpbojz.jpg", "unicine/peliculas/cc8fdbb388a4-480x670_kpbojz");
+insert into pelicula_imagenes values (2, "https://res.cloudinary.com/djrslfkmr/image/upload/v1668453992/unicine/peliculas/cb55daaeb245-480x670-3_hb8k2s.png", "unicine/peliculas/cb55daaeb245-480x670-3_hb8k2s");
+insert into pelicula_imagenes values (3, "https://res.cloudinary.com/djrslfkmr/image/upload/v1668454138/unicine/peliculas/la-luz-del-diablo-poster_lai5xs.jpg", "unicine/peliculas/la-luz-del-diablo-poster_lai5xs");
+insert into pelicula_imagenes values (4, "https://res.cloudinary.com/djrslfkmr/image/upload/v1668454068/unicine/peliculas/86c502a6cc59-poster-avatar-el-camino-del-agua_r2utxd.jpg", "unicine/peliculas/86c502a6cc59-poster-avatar-el-camino-del-agua_r2utxd");
+insert into pelicula_imagenes values (5, "https://res.cloudinary.com/djrslfkmr/image/upload/v1668453961/unicine/peliculas/mundoextranio_ubeg9c.jpg", "unicine/peliculas/mundoextranio_ubeg9c");
 /*
  (codigoPelicula, genero)
  */
 insert into pelicula_generos values (1, "DRAMA");
 insert into pelicula_generos values (1, "CIENCIA_FICCION");
 insert into pelicula_generos values (1, "ACCION");
-insert into pelicula_generos values (2, "FANTASIA");
 insert into pelicula_generos values (2, "FANTASIA");
 insert into pelicula_generos values (3, "DOCUMENTAL");
 insert into pelicula_generos values (4, "AVENTURA");
