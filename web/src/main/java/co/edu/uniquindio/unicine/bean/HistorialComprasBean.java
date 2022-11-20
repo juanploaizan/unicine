@@ -1,5 +1,7 @@
 package co.edu.uniquindio.unicine.bean;
 
+import co.edu.uniquindio.unicine.entidades.Cliente;
+import co.edu.uniquindio.unicine.entidades.Compra;
 import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,30 +12,30 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.util.List;
 
 @Component
 @ViewScoped
-public class GestionCuentaBean implements Serializable {
+public class HistorialComprasBean implements Serializable {
 
-    @Value("#{param['p1']}")
-    private String param1;
-
-    @Getter @Setter
-    private String mensaje = "Verificando su cuenta...";
+    @Value("#{seguridadBean.cliente}")
+    private Cliente cliente;
 
     @Autowired
     private ClienteServicio clienteServicio;
 
+    @Getter @Setter
+    private List<Compra> comprasCliente;
+
     @PostConstruct
     public void init() {
-        if(param1 != null && !param1.isEmpty()) {
+        if (cliente != null) {
             try {
-                clienteServicio.activarCuenta(param1);
-                mensaje = "Cuenta verificada, ¡redime el cupón de bienvenida agregado a tu cuenta! :D";
-
+                comprasCliente = clienteServicio.listarHistorialCompras(cliente.getCedula());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }
+
     }
 }

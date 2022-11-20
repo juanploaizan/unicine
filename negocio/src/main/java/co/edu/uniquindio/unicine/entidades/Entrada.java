@@ -33,7 +33,6 @@ public class Entrada implements Serializable {
 
     @Builder
     public Entrada(Character fila, Integer columna, Compra compra) {
-        this.precio = compra.getFuncion().getPrecio();
         this.fila = fila;
         this.columna = columna;
         this.compra = compra;

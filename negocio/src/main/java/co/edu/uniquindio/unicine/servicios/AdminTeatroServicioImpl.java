@@ -76,12 +76,12 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
     }
 
     private boolean verificarCodigoFuncion(Integer codigo) {
-       return funcionRepo.findByCodigo(codigo).orElse(null) != null;
+       return funcionRepo.findById(codigo).orElse(null) != null;
     }
 
     @Override
     public Funcion actualizarFuncion(Funcion funcion) throws Exception {
-        Optional<Funcion> guardado = funcionRepo.findByCodigo(funcion.getCodigo());
+        Optional<Funcion> guardado = funcionRepo.findById(funcion.getCodigo());
         if(!guardado.isPresent()){
             throw new Exception("la funcion no existe");
         }
@@ -90,7 +90,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
 
     @Override
     public void elimiarFuncion(Integer codigoFuncion) throws Exception{
-        Optional<Funcion> guardado = funcionRepo.findByCodigo(codigoFuncion);
+        Optional<Funcion> guardado = funcionRepo.findById(codigoFuncion);
         if(!guardado.isPresent()){
             throw new Exception("la funcion no existe");
         }
@@ -321,6 +321,16 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio{
             throw new Exception("El teatro no existe");
         }
         teatroRepo.save(teatro);
+    }
+
+    @Override
+    public List<Teatro> listarTeatrosCiudad(Integer codigoCiudad) throws Exception {
+        return teatroRepo.listarTeatrosCiudad(codigoCiudad);
+    }
+
+    @Override
+    public Teatro obtenerTeatro(int codigoTeatro) throws Exception {
+        return teatroRepo.findById(codigoTeatro).orElse(null);
     }
 
 
