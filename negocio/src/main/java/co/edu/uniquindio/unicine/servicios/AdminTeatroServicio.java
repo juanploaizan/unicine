@@ -70,4 +70,8 @@ public interface AdminTeatroServicio {
     Teatro crearTeatro(Teatro teatro) throws Exception;
 
     void actualizarTeatro(Teatro teatro) throws Exception;
+
+    List<Teatro> listarTeatrosCiudad(Integer codigo) throws Exception;
+
+    Teatro obtenerTeatro(int parseInt) throws Exception;
 }

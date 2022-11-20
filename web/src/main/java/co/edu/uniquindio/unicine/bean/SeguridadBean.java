@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
 
 @Component
@@ -34,6 +35,10 @@ public class SeguridadBean implements Serializable {
     private Ciudad ciudad;
     @Autowired
     private ClienteServicio clienteServicio;
+
+    @Email
+    @Getter @Setter
+    private String email;
 
     @PostConstruct
     public void init() {
@@ -77,4 +82,21 @@ public class SeguridadBean implements Serializable {
 
     //TODO iniciar sesión admin
     public void iniciarSesionAdmin() {}
+
+    public void reestablecerContrasenia(){
+
+        if (email != null && !email.isEmpty()) {
+            try {
+                clienteServicio.solicitarCambioContrasenia(email);
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Notificación", "Se envió correctamente el correo de recuperación");
+                FacesContext.getCurrentInstance().addMessage("recuperacion", fm);
+            } catch (Exception e) {
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notificación", e.getMessage());
+                FacesContext.getCurrentInstance().addMessage(null, fm);
+            }
+        } else {
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notificación", "El campo del correo es inválido");
+            FacesContext.getCurrentInstance().addMessage(null, fm);
+        }
+    }
 }

@@ -330,8 +330,8 @@ public class AdministradorPlataformaServicioImpl implements AdministradorPlatafo
     }
 
     @Override
-    public List<Funcion> obtenerFuncionesPorCiudadPelicula(Integer codigoPelicula, Integer codigoCiudad) throws Exception {
-        return funcionRepo.obtenerFuncionesPorCiudadPelicula(codigoPelicula, codigoCiudad);
+    public List<Funcion> obtenerFuncionesPorTeatroPelicula(Integer codigoPelicula, Integer codigoTeatro) throws Exception {
+        return funcionRepo.obtenerFuncionesPorTeatroPelicula(codigoPelicula, codigoTeatro);
     }
 
 }

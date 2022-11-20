@@ -82,5 +82,5 @@ public interface AdministradorPlataformaServicio {
 
     List<Ciudad> listarCiudades();
 
-    List<Funcion> obtenerFuncionesPorCiudadPelicula(Integer codigoPe, Integer codigoCiu) throws Exception;
+    List<Funcion> obtenerFuncionesPorTeatroPelicula(Integer codigoPe, Integer codigoTeatro) throws Exception;
 }
