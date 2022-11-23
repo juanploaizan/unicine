@@ -27,30 +27,13 @@
                         <h:graphicImage library="img" name="logo_unicine_blancoRec.png" styleClass="img_icon me-2"/>
                     </a>
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="" class="nav-link px-2 text-white">En Cartelera</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Próximamente</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white">Confitería</a></li>
+                        <li><a href="/admin_teatro/gestionar_teatro.xhtml" class="nav-link px-2 text-white">Gestión de Teatros</a></li>
+                        <li><a href="/admin_teatro/gestionar_salas.xhtml" class="nav-link px-2 text-white">Gestión de Salas</a></li>
+                        <li><a href="/admin_teatro/gestionar_funciones.xhtml" class="nav-link px-2 text-white">Gestión de Funciones</a></li>
+                        <li><a href="/admin_teatro/gestionar_horarios.xhtml" class="nav-link px-2 text-white">Gestión de Horarios</a></li>
                     </ul>
-
-                    <h:form styleClass="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                        <div class="input-search ui-inputgroup">
-                            <p:inputText placeholder="¿Qué película está buscando?" required="true"
-                                         value="#{busquedaBean.busqueda}" styleClass="busqueda_form"/>
-                            <p:commandButton update="@form" icon="pi pi-search" action="#{busquedaBean.buscar}"/>
-                        </div>
-                    </h:form>
-
-                    <div class="text-end">
-                        <h:form rendered="#{!seguridadBean.autenticado}">
-                            <p:commandButton value="Login" oncomplete="PF('login').show()" styleClass="ui-button-outlined ui-badge-secondary me-2" />
-                            <p:linkButton value="Registrarse" href="/registroCliente.xhtml" styleClass="sin-linea"/>
-                        </h:form>
-
-                        <h:form rendered="#{seguridadBean.autenticado}" >
-                            <p:linkButton value="Mi perfil" icon="pi pi-user" styleClass="me-3 sin-linea" href="/cliente/mi_perfil.xhtml"/>
-                            <p:commandButton value="Cerrar sesión" action="#{seguridadBean.cerrarSesion()}" styleClass="ui-button-outlined ui-badge-secondary me-2" />
-                        </h:form>
-                    </div>
+                    <p:commandButton value="Cerrar Sesión" action="#{seguridadBean.cerrarSesion()}"
+                                     styleClass="mt-4" icon="pi pi-sign-in" iconPos="left"/>
                 </div>
             </div>
         </header>

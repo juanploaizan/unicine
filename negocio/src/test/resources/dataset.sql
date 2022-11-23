@@ -90,6 +90,8 @@ insert into administrador_teatro values ("3000", "1234", "jloasiddi@email.com", 
 insert into administrador_teatro values ("4000", "1234", "jloasi45i@email.com", "urlImagen", "John Freddy Gomez", "3127495409");
 insert into administrador_teatro values ("5000", "1234", "jloasitsi@email.com", "urlImagen", "Alfredo Perez", "3127448409");
 
+insert into administrador_plataforma values ("1234", "1234", "admplatunicine@unicine.com", "urlImagen", "Cristiano Ronaldo Messi", "3124545343");
+
 /*
  (codigo, direccion, nombre, cedulaAdministrador, codigoCiudad)
  */

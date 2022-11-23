@@ -6,23 +6,21 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <h:outputStylesheet name="bootstrap.min.css" library="css" />
-    <h:outputScript name="bootstrap.bundle.min.js" library="js" />
-    <h:outputStylesheet name="styles.css" library="css"  />
-    <title>Crear teatro</title>
-</h:head>
 
-<h:body>
+<ui:composition template="/WEB-INF/template_admin_teatros.xhtml">
+
+    <ui:define name="contenido">
 
     <h:form id="crud_teatro">
 
         <p:toolbar>
             <p:toolbarGroup>
-                <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3" action="#{teatroBean.crearTeatroDialogo()}" update="dialogo_teatro" oncomplete="PF('crear_teatro').show()" />
-                <p:commandButton id="btn_borrar" value="#{teatroBean.mensajeBorrar}" icon="pi pi-trash" disabled="#{teatroBean.teatrosSeleccionados.size()==0 }" styleClass="ui-button-danger" action="#{teatroBean.eliminarTeatros()}" update="crud_teatro:lista, @this" />
+                <p:commandButton value="Agregar" icon="pi pi-plus" styleClass="ui-button-success me-3"
+                                 action="#{teatroBean.crearTeatroDialogo()}" update="dialogo_teatro"
+                                 oncomplete="PF('crear_teatro').show()" />
+                <p:commandButton id="btn_borrar" value="#{teatroBean.mensajeBorrar}" icon="pi pi-trash"
+                                 disabled="#{teatroBean.teatrosSeleccionados.size()==0 }" styleClass="ui-button-danger"
+                                 action="#{teatroBean.eliminarTeatros()}" update="crud_teatro:lista, @this" />
             </p:toolbarGroup>
         </p:toolbar>
 
@@ -93,6 +91,6 @@
             <p:growl for="mensaje_bean" showDetail="true" />
         </h:form>
     </p:dialog>
-
-</h:body>
+    </ui:define>
+</ui:composition>
 </html>
