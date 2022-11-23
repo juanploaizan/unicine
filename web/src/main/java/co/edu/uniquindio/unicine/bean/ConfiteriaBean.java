@@ -1,9 +1,8 @@
 package co.edu.uniquindio.unicine.bean;
 
-import co.edu.uniquindio.unicine.entidades.AdministradorTeatro;
 import co.edu.uniquindio.unicine.entidades.Genero;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
-import co.edu.uniquindio.unicine.entidades.Teatro;
+import co.edu.uniquindio.unicine.entidades.ProductoConfiteria;
 import co.edu.uniquindio.unicine.servicios.AdministradorPlataformaServicio;
 import co.edu.uniquindio.unicine.servicios.CloudinaryService;
 import lombok.Getter;
@@ -25,23 +24,19 @@ import java.util.*;
 
 @Component
 @ViewScoped
-public class PeliculaBean implements Serializable {
+public class ConfiteriaBean implements Serializable {
 
     @Getter @Setter
-    private Pelicula pelicula;
+    private ProductoConfiteria confiteria;
 
     @Getter @Setter
-    private ArrayList<Pelicula> peliculas;
+    private ArrayList<ProductoConfiteria> confiterias;
 
     @Getter @Setter
-    private ArrayList<Pelicula> peliculasSeleccionadas;
+    private ArrayList<ProductoConfiteria> confiteriasSeleccionadas;
 
     @Autowired
     private AdministradorPlataformaServicio administradorPlataformaServicio;
-
-    @Setter @Getter
-    private List<Genero> generos;
-
 
     private Map<String, String> imagenes;
 
@@ -52,53 +47,50 @@ public class PeliculaBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        pelicula = new Pelicula();
-        peliculas = (ArrayList<Pelicula>) administradorPlataformaServicio.listarPeliculas();
-        peliculasSeleccionadas = new ArrayList<Pelicula>();
-        generos = Arrays.asList(Genero.values());
+        confiteria = new ProductoConfiteria();
+        confiterias = (ArrayList<ProductoConfiteria>) administradorPlataformaServicio.listarProductosConfiteria();
+        confiteriasSeleccionadas = new ArrayList<ProductoConfiteria>();
         imagenes = new HashMap<>();
         editar = false;
     }
 
-    public void crearPelicula() {
+    public void crearConfiteria() {
         try {
             if (!imagenes.isEmpty()) {
                 if (!editar) {
-                    pelicula.setImagenes(imagenes);
-                    pelicula.setEstadoPelicula("PROXIMAMENTE");
-                    administradorPlataformaServicio.registrarPelicula(pelicula);
-                    pelicula = new Pelicula();
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula creada", "Has creado una nueva pelicula");
+                    confiteria.setImagen_producto(imagenes);
+                    administradorPlataformaServicio.registrarProductoConfiteria(confiteria);
+                    confiteria = new ProductoConfiteria();
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto de Confiteria creado", "Has creado un nuevo Producto de Confiteria");
                     FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
                 } else {
-                    pelicula.setImagenes(imagenes);
-                    pelicula.setEstadoPelicula("PROXIMAMENTE");
-                    administradorPlataformaServicio.actualizarPelicula(pelicula);
-                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula actualizada", "Se ha actualizado la pelicula");
+                    confiteria.setImagen_producto(imagenes);
+                    administradorPlataformaServicio.actualizarProductoConfiteria(confiteria);
+                    FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto de Confiteria actualizado", "Se ha actualizado el Producto de Confiteria");
                     FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
                 }
             }else{
-                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pelicula no creada", "No se ha subido ninguna imagen");
+                FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Producto de Confiteria no creado", "No se ha subido ninguna imagen");
                 FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
             }
         } catch (Exception e) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pelicula no creada", e.getMessage());
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Producto de Confiteria no creado", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }
     }
 
-    public void eliminarPeliculas() {
+    public void eliminarConfiterias() {
         try {
-            for (Pelicula p : peliculasSeleccionadas) {
-                administradorPlataformaServicio.eliminarPelicula(p.getCodigo());
-                peliculas.remove(p);
+            for (ProductoConfiteria pc : confiteriasSeleccionadas) {
+                administradorPlataformaServicio.eliminarProductoConfiteria(pc.getCodigo());
+                confiterias.remove(pc);
             }
-            peliculasSeleccionadas.clear();
+            confiteriasSeleccionadas.clear();
 
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula/s eliminada/s", "Se eliminó correctamente las películas seleccionadas.");
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto de Confiteria/s eliminada/s", "Se eliminó correctamente los Productos de Confiteria.");
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         } catch (Exception e) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Pelicula no eliminada", e.getMessage());
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "Producto de Confiteria no eliminada", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }
     }
@@ -107,10 +99,10 @@ public class PeliculaBean implements Serializable {
         try {
             UploadedFile imagen = event.getFile();
             File imagenFile = convertirUploadedFile(imagen);
-            Map resultado = cloudinaryService.subirImagen(imagenFile, "peliculas");
+            Map resultado = cloudinaryService.subirImagen(imagenFile, "confiteria");
             imagenes.put( resultado.get("public_id").toString(), resultado.get("url").toString() );
         } catch (Exception e) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pelicula no creada", e.getMessage());
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Producto de confiteria no creada", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }
     }
@@ -124,30 +116,30 @@ public class PeliculaBean implements Serializable {
     }
 
     public String getMensajeBorrar() {
-        if (peliculasSeleccionadas.size() == 0) {
+        if (confiteriasSeleccionadas.size() == 0) {
             return "Borrar";
-        } else if (peliculasSeleccionadas.size() == 1){
-            return "Borrar ("+peliculasSeleccionadas.size()+" elemento)";
+        } else if (confiteriasSeleccionadas.size() == 1){
+            return "Borrar ("+confiteriasSeleccionadas.size()+" elemento)";
         } else {
-            return "Borrar ("+peliculasSeleccionadas.size()+" elementos)";
+            return "Borrar ("+confiteriasSeleccionadas.size()+" elementos)";
         }
     }
 
     public String getMensajeDialogo(){
         if(editar){
-            return "Editar película";
+            return "Editar confiteria";
         } else {
-            return "Crear película";
+            return "Crear confiteria";
         }
     }
 
-    public void seleccionarPelicula(Pelicula pelicula) {
-        this.pelicula = pelicula;
+    public void seleccionarConfiteria(ProductoConfiteria confiteria) {
+        this.confiteria = confiteria;
         editar = true;
     }
 
-    public void crearPeliculaDialogo() {
-        this.pelicula = new Pelicula();
+    public void crearConfiteriaDialogo() {
+        this.confiteria = new ProductoConfiteria();
         editar = false;
     }
 }

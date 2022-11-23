@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface AdminTeatroServicio {
 
-    AdministradorTeatro login(String email, String contrasenia) throws Exception;
+    AdministradorTeatro login(String email, String contrasenia);
 
     //Servicios sobre las "Funciones"
     Funcion registrarFuncion(Funcion funcion) throws Exception;
@@ -30,6 +30,8 @@ public interface AdminTeatroServicio {
     Sala registrarSala(Sala sala) throws Exception;
 
     Sala buscarSalaCodigo(Integer codigoSala) throws Exception;
+
+    List<Sala> listarSalaTeatro(Integer codigoTeatro);
 
     Sala actualizarSala(Sala sala) throws Exception;
 
@@ -74,4 +76,12 @@ public interface AdminTeatroServicio {
     List<Teatro> listarTeatrosCiudad(Integer codigo) throws Exception;
 
     Teatro obtenerTeatro(int parseInt) throws Exception;
+
+    DistribucionSillas buscarDistribucionSillas(Integer codigo);
+
+    List<DistribucionSillas> listarDistribucionesSillas();
+
+    TipoSala buscarTipoSala(Integer codigo);
+
+    List<TipoSala> listarTiposSala();
 }
